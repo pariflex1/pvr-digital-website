@@ -1,69 +1,123 @@
-import Image from "next/image";
+import React from "react";
+import { Hero } from "@/components/sections/Hero";
+import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ServiceCard } from "@/components/ui/ServiceCard";
+import { ServicesAccordion } from "@/components/accordion/ServicesAccordion";
+import { WhyUs } from "@/components/sections/WhyUs";
+import { StepList } from "@/components/ui/StepList";
+import { IndustriesGrid } from "@/components/sections/IndustriesGrid";
+import { TechStrip } from "@/components/sections/TechStrip";
+import { FAQAccordion } from "@/components/accordion/FAQAccordion";
+import { FinalCta } from "@/components/sections/FinalCta";
+import { servicesData } from "@/content/services";
+import { generalFaqs } from "@/content/faqs";
+import { siteConfig } from "@/content/site";
+import { generateFaqSchema } from "@/lib/seo";
 
-export default function Home() {
+export const metadata = {
+  title: "Digital Studio | Websites, Software & AI Automation",
+  description: "High-speed websites, custom business tools, 24/7 WhatsApp AI chatbots, and targeted Meta ads for Indian small and mid-size businesses."
+};
+
+export default function HomePage() {
+  const faqSchema = generateFaqSchema(generalFaqs.slice(0, 8));
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      {/* 1. Hero */}
+      <Hero />
+
+      {/* 2. Service Lines (4 Cards) */}
+      <section className="section-dark py-20 border-b border-[#262A33]">
+        <Container>
+          <SectionHeading
+            eyebrow="Core Competencies"
+            title="Four Specialized Service Domains"
+            description="From consumer-facing web experiences to internal operations and automated lead funnels, our 44 solutions cover your full digital lifecycle."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {servicesData.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* 3. Signature Services Accordion */}
+      <section id="services-catalogue" className="section-light py-20 border-b border-[var(--line)] scroll-mt-20">
+        <Container>
+          <SectionHeading
+            eyebrow="Full Catalogue"
+            title="Explore All 44 Digital Solutions"
+            description="Tap any service line to reveal specialized deliverables with clear business outcomes and plain-language definitions."
+          />
+
+          <div className="bg-white p-6 sm:p-10 rounded-2xl border border-[#D9DCE3] shadow-sm">
+            <ServicesAccordion />
+          </div>
+        </Container>
+      </section>
+
+      {/* 4. Why Us */}
+      <WhyUs />
+
+      {/* 5. How We Work (4 Steps) */}
+      <section className="section-light-alt py-20 border-b border-[var(--line)]">
+        <Container>
+          <SectionHeading
+            eyebrow="Proven Workflow"
+            title="How We Execute Your Project"
+            description="A direct, disciplined process with zero fluff, rapid feedback loops, and transparent milestones."
+          />
+
+          <StepList />
+        </Container>
+      </section>
+
+      {/* 6. Industries We Serve */}
+      <IndustriesGrid />
+
+      {/* 7. Tech We Use */}
+      <TechStrip />
+
+      {/* 8. Work Preview (Hidden until real case studies exist per Section 5.1.8 & 14) */}
+      {siteConfig.features.workSectionEnabled && (
+        <section className="section-light py-20 border-b border-[var(--line)]">
+          <Container>
+            <SectionHeading
+              eyebrow="Case Studies"
+              title="Recent Client Outcomes"
+              description="Real results delivered for growing businesses."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            {/* Work cards will render here when supplied */}
+          </Container>
+        </section>
+      )}
+
+      {/* 9. FAQ Section */}
+      <section className="section-light py-20 border-b border-[var(--line)]">
+        <Container>
+          <SectionHeading
+            eyebrow="Got Questions?"
+            title="Frequently Asked Questions"
+            description="Clear, honest answers about project timelines, pricing structure, code ownership, and ongoing support."
+          />
+
+          <div className="max-w-3xl mx-auto bg-white p-6 sm:p-10 rounded-2xl border border-[#D9DCE3] shadow-sm">
+            <FAQAccordion faqs={generalFaqs.slice(0, 8)} />
+          </div>
+        </Container>
+      </section>
+
+      {/* 10. Final CTA Band */}
+      <FinalCta />
+    </>
   );
 }

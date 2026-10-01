@@ -15,7 +15,7 @@ export const leadFormSchema = z.object({
     .regex(indianPhoneRegex, "Please enter a valid 10-digit Indian mobile number."),
   email: z.string().trim().email("Please enter a valid email address.").optional().or(z.literal("")),
   message: z.string().trim().max(1000, "Message cannot exceed 1000 characters.").optional(),
-  consent: z.literal(true, {
+  consent: z.boolean().refine((val) => val === true, {
     message: "You must agree to the privacy policy to continue."
   }),
   honeypot: z.string().max(0, "Bot detected").optional()
