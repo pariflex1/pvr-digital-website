@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@import "@fontsource/syne/700.css";
+@import "@fontsource/syne/800.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+
+:root {
+  /* Default dark tokens for cinematic hero and dark sections */
+  --bg-dark: #0A0B0F;
+  --surface-dark: #12141A;
+  --line-dark: #262A33;
+  --text-dark: #F3F1EA;
+  --muted-dark: #A3A8B3;
+  --gold-dark: #D9AE55;
+  --gold-strong-dark: #F0C873;
+  --on-gold-dark: #1A1300;
+
+  /* Light tokens for content sections per Section 7.2 */
+  --bg-light: #F5F6F8;
+  --surface-light: #FFFFFF;
+  --line-light: #D9DCE3;
+  --text-light: #14161B;
+  --muted-light: #515866;
+  --gold-light: #9A6F12;
+  --gold-strong-light: #7A560A;
+  --on-gold-light: #FFFFFF;
+
+  /* Active root defaults (Hero is always dark) */
+  --bg: var(--bg-dark);
+  --surface: var(--surface-dark);
+  --line: var(--line-dark);
+  --text: var(--text-dark);
+  --muted: var(--muted-dark);
+  --gold: var(--gold-dark);
+  --gold-strong: var(--gold-strong-dark);
+  --on-gold: var(--on-gold-dark);
+
+  --font-display: "Syne", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Light section wrapper */
+.section-light {
+  --bg: var(--bg-light);
+  --surface: var(--surface-light);
+  --line: var(--line-light);
+  --text: var(--text-light);
+  --muted: var(--muted-light);
+  --gold: var(--gold-light);
+  --gold-strong: var(--gold-strong-light);
+  --on-gold: var(--on-gold-light);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Dark section wrapper */
+.section-dark {
+  --bg: var(--bg-dark);
+  --surface: var(--surface-dark);
+  --line: var(--line-dark);
+  --text: var(--text-dark);
+  --muted: var(--muted-dark);
+  --gold: var(--gold-dark);
+  --gold-strong: var(--gold-strong-dark);
+  --on-gold: var(--on-gold-dark);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Light alternate section wrapper */
+.section-light-alt {
+  --bg: #ECEEF2;
+  --surface: #FFFFFF;
+  --line: #D9DCE3;
+  --text: #14161B;
+  --muted: #515866;
+  --gold: #9A6F12;
+  --gold-strong: #7A560A;
+  --on-gold: #FFFFFF;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+/* Fluid typography scale per Section 7.3 */
+.h1-fluid {
+  font-size: clamp(2.4rem, 8vw, 4.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.h2-fluid {
+  font-size: clamp(1.8rem, 5.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.h3-fluid {
+  font-size: clamp(1.25rem, 3.5vw, 1.65rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+/* Interactive focus ring per Section 6.1 */
+*:focus-visible {
+  outline: 3px solid #D9AE55;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference per Section 7.5 */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Film grain overlay for hero per Section 7.6 */
+.bg-grain {
+  background-image: radial-gradient(rgba(217, 174, 85, 0.07) 1px, transparent 0);
+  background-size: 24px 24px;
+}
