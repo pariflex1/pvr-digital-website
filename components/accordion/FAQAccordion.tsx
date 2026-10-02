@@ -10,14 +10,14 @@ interface FAQAccordionProps {
 }
 
 export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // First item open by default
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleIndex = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div className={cn("w-full divide-y divide-[var(--line)]", className)}>
+    <div className={cn("w-full divide-y divide-white/[0.08]", className)}>
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
         const btnId = `faq-btn-${index}`;
@@ -31,24 +31,24 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => toggleIndex(index)}
-              className="w-full min-h-[52px] py-4 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#D9AE55] focus-visible:outline-offset-2 rounded cursor-pointer"
+              className="w-full min-h-[56px] py-4 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F5C518] rounded-xl cursor-pointer"
             >
               <span
                 className={cn(
-                  "font-display text-[17px] md:text-[19px] font-semibold transition-colors pr-4",
-                  isOpen ? "text-[#D9AE55]" : "text-[var(--text)] group-hover:text-[#D9AE55]"
+                  "font-display text-[17px] md:text-[19px] font-bold transition-colors pr-6 break-words",
+                  isOpen ? "text-[#F5C518]" : "text-white group-hover:text-[#F5C518]"
                 )}
               >
                 {faq.question}
               </span>
 
-              {/* 30px Round Toggle */}
+              {/* Minimalist 32px Round Toggle */}
               <div
                 className={cn(
-                  "w-[30px] h-[30px] rounded-full flex items-center justify-center shrink-0 ml-2 transition-all duration-200 relative",
+                  "w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-3 transition-all duration-300 relative border",
                   isOpen
-                    ? "bg-[#D9AE55] text-[#1A1300]"
-                    : "bg-[var(--line)] text-[var(--muted)] group-hover:text-[var(--text)]"
+                    ? "bg-[#F5C518] text-[#070709] border-[#F5C518] shadow-[0_0_12px_rgba(245,197,24,0.3)]"
+                    : "bg-white/[0.04] text-[#8E94A4] border-white/10 group-hover:border-white/30 group-hover:text-white"
                 )}
                 aria-hidden="true"
               >
@@ -73,7 +73,7 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
               )}
             >
               <div className="overflow-hidden">
-                <p className="pb-5 pt-1 text-[15px] md:text-[16px] leading-relaxed text-[var(--muted)] max-w-[70ch]">
+                <p className="pb-6 pt-1 text-[15px] md:text-[16px] leading-relaxed text-[#8E94A4] max-w-[75ch] break-words">
                   {faq.answer}
                 </p>
               </div>

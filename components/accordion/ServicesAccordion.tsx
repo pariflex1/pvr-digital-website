@@ -18,7 +18,6 @@ export function ServicesAccordion({
   initialItemSlug,
   className
 }: ServicesAccordionProps) {
-  // Default state: first service line open, no Level 2 item open
   const [activeLevel1, setActiveLevel1] = useState<string>(
     initialServiceSlug || servicesData[0]?.slug || ""
   );
@@ -28,7 +27,7 @@ export function ServicesAccordion({
   const level2Refs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Sync hash deep-linking on mount and hashchange
+  // Sync hash deep-linking
   useEffect(() => {
     function parseHash() {
       if (typeof window === "undefined") return;
@@ -53,7 +52,6 @@ export function ServicesAccordion({
     return () => window.removeEventListener("hashchange", parseHash);
   }, []);
 
-  // Update hash when interaction changes without adding history entries (replaceState)
   const updateHash = (l1: string, l2: string) => {
     if (typeof window === "undefined") return;
     const newHash = l2 ? `#${l1}/${l2}` : `#${l1}`;
@@ -62,17 +60,14 @@ export function ServicesAccordion({
 
   const handleToggleLevel1 = (serviceSlug: string) => {
     if (activeLevel1 === serviceSlug) {
-      // PRD: "Exactly one Level 1 panel open at a time"
-      // If user taps the already active line, keep it open or toggle? "Exactly one Level 1 panel open at a time."
       return;
     }
 
     setActiveLevel1(serviceSlug);
-    setActiveLevel2(""); // Opening another closes previous and closes Level 2 inside it
+    setActiveLevel2("");
     updateHash(serviceSlug, "");
     trackEvent("accordion_open", { level: 1, item: serviceSlug });
 
-    // Smooth-scroll Level 1 panel to top of viewport on mobile (respecting prefers-reduced-motion)
     if (window.innerWidth < 768) {
       setTimeout(() => {
         const btn = level1Refs.current.get(serviceSlug);
@@ -98,7 +93,6 @@ export function ServicesAccordion({
     }
   };
 
-  // Keyboard navigation for Level 1
   const handleLevel1KeyDown = (e: React.KeyboardEvent, index: number) => {
     const total = servicesData.length;
     let nextIndex = -1;
@@ -123,7 +117,6 @@ export function ServicesAccordion({
     }
   };
 
-  // Keyboard navigation for Level 2 within current service line
   const handleLevel2KeyDown = (e: React.KeyboardEvent, items: ServiceItem[], index: number) => {
     const total = items.length;
     let nextIndex = -1;
@@ -149,7 +142,7 @@ export function ServicesAccordion({
   };
 
   return (
-    <div ref={containerRef} className={cn("w-full divide-y divide-[var(--line)]", className)}>
+    <div ref={containerRef} className={cn("w-full divide-y divide-white/[0.08]", className)}>
       {servicesData.map((service, l1Index) => {
         const isL1Open = activeLevel1 === service.slug;
         const l1ButtonId = `l1-btn-${service.slug}`;
@@ -168,30 +161,33 @@ export function ServicesAccordion({
               aria-controls={l1PanelId}
               onClick={() => handleToggleLevel1(service.slug)}
               onKeyDown={(e) => handleLevel1KeyDown(e, l1Index)}
-              className="w-full min-h-[56px] py-4 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#D9AE55] focus-visible:outline-offset-2 rounded-lg cursor-pointer"
+              className="w-full min-h-[64px] py-5 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F5C518] focus-visible:outline-offset-2 rounded-xl cursor-pointer"
             >
-              <div>
-                <span className="block font-display text-[clamp(1.25rem,5vw,1.75rem)] font-medium text-[var(--text)] group-hover:text-[#D9AE55] transition-colors">
-                  {service.title}
+              <div className="flex items-start sm:items-center gap-4 sm:gap-6">
+                <span className="font-mono text-sm sm:text-base font-bold text-[#F5C518] shrink-0 pt-0.5 sm:pt-0">
+                  {service.number}
                 </span>
-                <span className="block text-xs font-medium text-[var(--muted)] mt-0.5">
-                  {service.items.length} solutions &bull; {service.scope}
-                </span>
+                <div>
+                  <span className="block font-display text-[clamp(1.35rem,4vw,2rem)] font-bold text-white group-hover:text-[#F5C518] transition-colors">
+                    {service.title}
+                  </span>
+                  <span className="block font-mono text-[11px] uppercase tracking-wider text-[#8E94A4] mt-1">
+                    {service.items.length} deliverables &bull; {service.scope}
+                  </span>
+                </div>
               </div>
 
-              {/* 36px Round Toggle Button */}
+              {/* Minimalist 36px Round Toggle Indicator */}
               <div
                 className={cn(
-                  "w-9 h-9 rounded-full flex items-center justify-center shrink-0 ml-4 transition-all duration-300 relative",
+                  "w-10 h-10 rounded-full flex items-center justify-center shrink-0 ml-4 transition-all duration-300 relative border",
                   isL1Open
-                    ? "bg-[#D9AE55] text-[#1A1300] shadow-sm"
-                    : "bg-[var(--line)] text-[var(--text)] group-hover:bg-[#D9AE55]/20"
+                    ? "bg-[#F5C518] text-[#070709] border-[#F5C518] shadow-[0_0_15px_rgba(245,197,24,0.3)]"
+                    : "bg-white/[0.04] text-[#8E94A4] border-white/10 group-hover:border-[#F5C518]/50 group-hover:text-white"
                 )}
                 aria-hidden="true"
               >
-                {/* Horizontal bar */}
                 <span className="w-3.5 h-[2px] bg-current rounded-full" />
-                {/* Vertical bar collapses with scale transition */}
                 <span
                   className={cn(
                     "absolute w-[2px] h-3.5 bg-current rounded-full transition-transform duration-250 ease-out",
@@ -201,7 +197,7 @@ export function ServicesAccordion({
               </div>
             </button>
 
-            {/* Level 1 Panel (Height animation via CSS grid-template-rows: 0fr -> 1fr) */}
+            {/* Level 1 Panel */}
             <div
               id={l1PanelId}
               role="region"
@@ -214,21 +210,21 @@ export function ServicesAccordion({
             >
               <div className="overflow-hidden">
                 {/* Intro summary banner */}
-                <div className="py-4 px-1 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[var(--line)] text-sm">
-                  <p className="text-[var(--muted)] leading-relaxed max-w-xl">
+                <div className="py-5 px-1 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] text-sm">
+                  <p className="text-[#8E94A4] text-base leading-relaxed max-w-2xl">
                     {service.intro}
                   </p>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 font-semibold text-xs text-[#D9AE55] hover:underline shrink-0"
+                    className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[#F5C518] hover:underline shrink-0"
                   >
-                    <span>View dedicated page</span>
+                    <span>View Dedicated Page</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
                 {/* Level 2 Items List */}
-                <div className="divide-y divide-[var(--line)]/60 pt-1">
+                <div className="divide-y divide-white/[0.05] pt-2">
                   {service.items.map((item, l2Index) => {
                     const isL2Open = activeLevel2 === item.slug;
                     const l2ButtonId = `l2-btn-${item.slug}`;
@@ -246,26 +242,25 @@ export function ServicesAccordion({
                           aria-controls={l2PanelId}
                           onClick={() => handleToggleLevel2(item.slug)}
                           onKeyDown={(e) => handleLevel2KeyDown(e, service.items, l2Index)}
-                          className="w-full min-h-[48px] py-3 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#D9AE55] focus-visible:outline-offset-2 rounded cursor-pointer"
+                          className="w-full min-h-[48px] py-3.5 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F5C518] rounded-lg cursor-pointer"
                         >
                           <span
                             className={cn(
-                              "text-[16px] font-medium transition-colors",
+                              "text-[15px] sm:text-[16px] font-medium transition-colors",
                               isL2Open
-                                ? "text-[#D9AE55] font-semibold"
-                                : "text-[var(--text)] group-hover:text-[#D9AE55]"
+                                ? "text-[#F5C518] font-semibold"
+                                : "text-white/90 group-hover:text-white"
                             )}
                           >
                             {item.title}
                           </span>
 
-                          {/* 26px Round Toggle Button */}
                           <div
                             className={cn(
-                              "w-[26px] h-[26px] rounded-full flex items-center justify-center shrink-0 ml-3 transition-all duration-200 relative",
+                              "w-6 h-6 rounded-full flex items-center justify-center shrink-0 ml-3 transition-all duration-200 relative border",
                               isL2Open
-                                ? "bg-[#D9AE55] text-[#1A1300]"
-                                : "bg-[var(--line)]/80 text-[var(--muted)] group-hover:text-[var(--text)]"
+                                ? "bg-[#F5C518] text-[#070709] border-[#F5C518]"
+                                : "bg-white/[0.04] text-[#8E94A4] border-white/10 group-hover:text-white"
                             )}
                             aria-hidden="true"
                           >
@@ -291,11 +286,11 @@ export function ServicesAccordion({
                           )}
                         >
                           <div className="overflow-hidden">
-                            <div className="pb-4 pt-1 max-w-[60ch] space-y-2 text-[15px] sm:text-[16px] leading-[1.55] text-[var(--muted)]">
+                            <div className="pb-5 pt-1 max-w-[65ch] space-y-2 text-[15px] leading-relaxed text-[#8E94A4]">
                               <p>{item.description}</p>
                               {item.bestFor && (
-                                <p className="text-xs text-[var(--text)] font-medium pt-1">
-                                  <span className="text-[#D9AE55] font-semibold">Best for: </span>
+                                <p className="text-xs text-white/90 font-mono pt-1">
+                                  <span className="text-[#F5C518] font-bold">BEST FOR: </span>
                                   {item.bestFor}
                                 </p>
                               )}

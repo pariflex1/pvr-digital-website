@@ -19,21 +19,22 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "space-y-3 mb-10 md:mb-14",
-        align === "center" ? "text-center mx-auto max-w-2xl" : "max-w-2xl",
+        "space-y-4 mb-12 sm:mb-16",
+        align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-3xl",
         className
       )}
     >
       {eyebrow && (
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D9AE55]/10 text-[#D9AE55] border border-[#D9AE55]/20">
+        <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" />
           <span>{eyebrow}</span>
         </div>
       )}
-      <h2 className="h2-fluid font-bold tracking-tight text-[var(--text)]">
+      <h2 className="h2-editorial text-white tracking-tight uppercase break-words">
         {title}
       </h2>
       {description && (
-        <p className="text-[16px] md:text-[18px] text-[var(--muted)] leading-relaxed">
+        <p className="text-[16px] sm:text-[18px] text-[#8E94A4] leading-relaxed max-w-2xl break-words">
           {description}
         </p>
       )}

@@ -15,23 +15,23 @@ export default function NotFound() {
   const whatsappUrl = getWhatsAppUrl({ pagePath: "/404" });
 
   return (
-    <div className="bg-[#0A0B0F] min-h-[70vh] flex items-center py-20">
+    <div className="bg-[#0A0A0A] min-h-[70vh] flex items-center py-20">
       <Container className="text-center max-w-2xl space-y-6">
-        <span className="font-display font-extrabold text-7xl sm:text-8xl text-[#D9AE55] block">
+        <span className="font-display font-extrabold text-7xl sm:text-8xl text-[#F5C518] block">
           404
         </span>
 
-        <h1 className="h2-fluid font-bold text-[#F3F1EA] tracking-tight">
+        <h1 className="h2-fluid font-bold text-[#F8F8F8] tracking-tight">
           Page Not Found
         </h1>
 
-        <p className="text-[16px] sm:text-[18px] text-[#A3A8B3] leading-relaxed max-w-lg mx-auto">
+        <p className="text-[16px] sm:text-[18px] text-[#888888] leading-relaxed max-w-lg mx-auto">
           The link you followed may be broken or the page has moved. Explore our core services or connect with us directly on WhatsApp.
         </p>
 
         {/* Quick Links */}
         <div className="pt-4 pb-2">
-          <span className="block text-xs uppercase tracking-wider text-[#A3A8B3] font-semibold mb-3">
+          <span className="block text-xs uppercase tracking-wider text-[#888888] font-semibold mb-3">
             Looking for one of our services?
           </span>
           <div className="flex flex-wrap justify-center gap-2">
@@ -39,7 +39,7 @@ export default function NotFound() {
               <Link
                 key={s.id}
                 href={`/services/${s.slug}`}
-                className="px-3.5 py-1.5 rounded-full bg-[#12141A] border border-[#262A33] hover:border-[#D9AE55] text-xs font-medium text-[#F3F1EA] hover:text-[#D9AE55] transition-all"
+                className="px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#2A2A2A] hover:border-[#F5C518] text-xs font-medium text-[#F8F8F8] hover:text-[#F5C518] transition-all"
               >
                 {s.title}
               </Link>
@@ -58,9 +58,9 @@ export default function NotFound() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 min-h-[48px] px-6 rounded-full bg-[#12141A] border border-[#262A33] text-[#F3F1EA] text-sm font-semibold hover:border-[#D9AE55] hover:text-[#D9AE55] transition-all"
+            className="inline-flex items-center gap-2 min-h-[48px] px-6 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#F8F8F8] text-sm font-semibold hover:border-[#F5C518] hover:text-[#F5C518] transition-all"
           >
-            <MessageCircle className="w-4 h-4 text-[#D9AE55]" />
+            <MessageCircle className="w-4 h-4 text-[#F5C518]" />
             <span>Chat on WhatsApp</span>
           </a>
         </div>

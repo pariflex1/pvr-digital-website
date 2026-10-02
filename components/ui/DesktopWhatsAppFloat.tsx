@@ -22,7 +22,7 @@ export function DesktopWhatsAppFloat() {
       <span className="sr-only">Chat on WhatsApp</span>
       
       {/* Tooltip on hover */}
-      <span className="absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-[#12141A] text-[#F3F1EA] text-xs font-semibold whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity border border-[#262A33] shadow-lg">
+      <span className="absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-[#141414] text-[#F8F8F8] text-xs font-semibold whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity border border-[#2A2A2A] shadow-lg">
         Chat on WhatsApp
       </span>
     </a>

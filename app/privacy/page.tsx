@@ -11,23 +11,23 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-[#0A0B0F] py-16 md:py-24 text-[#F3F1EA]">
+    <div className="bg-[#0A0A0A] py-16 md:py-24 text-[#F8F8F8]">
       <Container className="max-w-3xl space-y-8">
         <div>
-          <span className="text-xs uppercase tracking-wider font-semibold text-[#D9AE55] block mb-2">
+          <span className="text-xs uppercase tracking-wider font-semibold text-[#F5C518] block mb-2">
             Legal & Compliance // DRAFT-REVIEW
           </span>
-          <h1 className="h2-fluid font-bold tracking-tight text-[#F3F1EA]">
+          <h1 className="h2-fluid font-bold tracking-tight text-[#F8F8F8]">
             Privacy Policy
           </h1>
-          <p className="text-xs text-[#A3A8B3] mt-2">
+          <p className="text-xs text-[#888888] mt-2">
             Last updated: October 2026. Subject to final review by legal counsel.
           </p>
         </div>
 
-        <div className="space-y-6 text-[15px] text-[#A3A8B3] leading-relaxed border-t border-[#262A33] pt-6">
+        <div className="space-y-6 text-[15px] text-[#888888] leading-relaxed border-t border-[#2A2A2A] pt-6">
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-[#F3F1EA]">1. Information We Collect</h2>
+            <h2 className="font-display text-xl font-bold text-[#F8F8F8]">1. Information We Collect</h2>
             <p>
               When you submit an enquiry through our quote wizard, contact forms, or direct WhatsApp buttons, we collect:
             </p>
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-[#F3F1EA]">2. How We Use Your Information</h2>
+            <h2 className="font-display text-xl font-bold text-[#F8F8F8]">2. How We Use Your Information</h2>
             <p>
               We process your data strictly to:
             </p>
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-[#F3F1EA]">3. Third-Party Service Processors</h2>
+            <h2 className="font-display text-xl font-bold text-[#F8F8F8]">3. Third-Party Service Processors</h2>
             <p>
               We utilize trusted cloud infrastructure to securely process information:
             </p>
@@ -65,14 +65,14 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-[#F3F1EA]">4. Data Retention & Deletion</h2>
+            <h2 className="font-display text-xl font-bold text-[#F8F8F8]">4. Data Retention & Deletion</h2>
             <p>
               We retain business enquiries for up to 12 months to facilitate commercial discussions. You may request the immediate deletion or export of your personal information at any time by contacting us at {siteConfig.email}.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl font-bold text-[#F3F1EA]">5. Contact Our Privacy Officer</h2>
+            <h2 className="font-display text-xl font-bold text-[#F8F8F8]">5. Contact Our Privacy Officer</h2>
             <p>
               For questions regarding this policy or data practices, contact {siteConfig.brandName} at {siteConfig.email} or by post at {siteConfig.city}, {siteConfig.state}, India.
             </p>

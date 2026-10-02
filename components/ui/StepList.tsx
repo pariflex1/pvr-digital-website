@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowRight, Check } from "lucide-react";
 
 export interface StepItem {
   number: string;
@@ -10,27 +11,27 @@ export interface StepItem {
 export const defaultSteps: StepItem[] = [
   {
     number: "01",
-    title: "Discuss & Define",
-    description: "We deep-dive into your exact business model, customer journey, pain points, and commercial targets.",
-    outcome: "Clear project scope, transparent timeline, and guaranteed flat pricing."
+    title: "Discovery & Blueprint",
+    description: "We deep-dive into your exact business model, sales journey, customer bottlenecks, and revenue targets.",
+    outcome: "Clear operational scope, fixed delivery milestones, and guaranteed upfront pricing."
   },
   {
     number: "02",
-    title: "Plan & Design",
-    description: "Mobile-first wireframes, UX flows, and high-fidelity screen designs crafted for quick decision-making.",
-    outcome: "Approved interactive design prototype ready before a single line of code is written."
+    title: "Architecture & Prototype",
+    description: "Mobile-first editorial layouts, conversion journeys, and high-fidelity interactive previews.",
+    outcome: "Approved interactive prototype before writing production code."
   },
   {
     number: "03",
-    title: "Build & Integrate",
-    description: "Clean, high-performance coding with automated testing, database setup, WhatsApp APIs, and ad tracking.",
-    outcome: "Sub-2-second page loads, SEO readiness, and verified bug-free workflows."
+    title: "Engineering & Automation",
+    description: "Clean Next.js coding, edge database configuration, WhatsApp API automations, and pixel tracking.",
+    outcome: "Sub-2-second page loads, 99+ Core Web Vitals, and verified error-free lead flows."
   },
   {
     number: "04",
-    title: "Launch & Support",
-    description: "Deployment to edge CDN, domain configuration, staff handoff, analytics verification, and ongoing maintenance.",
-    outcome: "Your digital asset live and generating leads with full ownership transferred to you."
+    title: "Deployment & Handover",
+    description: "Global edge CDN deployment, domain setup, full code repository handover, and staff walkthrough.",
+    outcome: "Your digital engine live, generating leads, with 100% intellectual property transferred to you."
   }
 ];
 
@@ -40,30 +41,50 @@ interface StepListProps {
 
 export function StepList({ steps = defaultSteps }: StepListProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {steps.map((step) => (
-        <div
-          key={step.number}
-          className="flex flex-col justify-between p-6 rounded-2xl bg-[var(--surface)] border border-[var(--line)] shadow-sm hover:border-[#D9AE55]/50 transition-colors"
-        >
-          <div>
-            <div className="w-10 h-10 rounded-xl bg-[#D9AE55]/10 text-[#D9AE55] flex items-center justify-center font-display font-bold text-base mb-4 border border-[#D9AE55]/20">
-              {step.number}
-            </div>
-            <h3 className="font-display text-xl font-bold text-[var(--text)] mb-2">
-              {step.title}
-            </h3>
-            <p className="text-[15px] text-[var(--muted)] leading-relaxed mb-4">
-              {step.description}
-            </p>
-          </div>
+    <div className="relative">
+      {/* Top Architectural Progress Rule (Desktop) */}
+      <div 
+        className="hidden lg:block absolute top-7 left-12 right-12 h-[1px] bg-gradient-to-r from-transparent via-[#F5C518]/30 to-transparent -z-0" 
+        aria-hidden="true" 
+      />
 
-          <div className="pt-3 border-t border-[var(--line)] text-xs">
-            <span className="font-semibold text-[var(--text)] block mb-0.5">Key Outcome:</span>
-            <span className="text-[var(--muted)]">{step.outcome}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative z-10">
+        {steps.map((step, idx) => (
+          <div
+            key={step.number}
+            className="flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#0E1016] border border-white/[0.08] hover:border-[#F5C518]/50 transition-all duration-300 group"
+          >
+            <div>
+              {/* Step indicator with glowing ring */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-12 h-12 rounded-xl bg-[#141620] border border-white/10 group-hover:border-[#F5C518] text-[#F5C518] flex items-center justify-center font-mono font-bold text-sm transition-colors shadow-sm">
+                  {step.number}
+                </div>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#5C6274]">
+                  PHASE 0{idx + 1}
+                </span>
+              </div>
+
+              <h3 className="font-display text-xl font-bold text-white mb-3 group-hover:text-[#F5C518] transition-colors break-words">
+                {step.title}
+              </h3>
+
+              <p className="text-[14px] text-[#8E94A4] leading-relaxed mb-6 break-words">
+                {step.description}
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-white/[0.06] text-xs space-y-1">
+              <span className="font-mono uppercase tracking-wider text-[#F5C518] block font-semibold">
+                Tangible Milestone:
+              </span>
+              <p className="text-white/80 leading-relaxed break-words">
+                {step.outcome}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

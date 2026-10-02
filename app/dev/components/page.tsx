@@ -17,9 +17,9 @@ export const metadata = {
 
 export default function DevComponentsPage() {
   return (
-    <div className="py-16 space-y-24 bg-[#0A0B0F]">
+    <div className="py-16 space-y-24 bg-[#0A0A0A]">
       {/* 1. Typography & Colors */}
-      <section className="border-b border-[#262A33] pb-16">
+      <section className="border-b border-[#2A2A2A] pb-16">
         <Container>
           <SectionHeading
             eyebrow="Phase 1 Verification"
@@ -28,33 +28,33 @@ export default function DevComponentsPage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-            <div className="p-6 rounded-2xl bg-[#12141A] border border-[#262A33]">
-              <h3 className="font-display text-lg font-bold text-[#F3F1EA] mb-4">
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#2A2A2A]">
+              <h3 className="font-display text-lg font-bold text-[#F8F8F8] mb-4">
                 Color & Token Preview
               </h3>
               <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 rounded-lg bg-[#0A0B0F] border border-[#262A33] text-[#F3F1EA]">
+                <div className="p-3 rounded-lg bg-[#0A0A0A] border border-[#2A2A2A] text-[#F8F8F8]">
                   <span className="block font-semibold">--bg</span>
-                  <span className="text-[#A3A8B3]">#0A0B0F</span>
+                  <span className="text-[#888888]">#0A0A0A</span>
                 </div>
-                <div className="p-3 rounded-lg bg-[#12141A] border border-[#262A33] text-[#F3F1EA]">
+                <div className="p-3 rounded-lg bg-[#141414] border border-[#2A2A2A] text-[#F8F8F8]">
                   <span className="block font-semibold">--surface</span>
-                  <span className="text-[#A3A8B3]">#12141A</span>
+                  <span className="text-[#888888]">#141414</span>
                 </div>
-                <div className="p-3 rounded-lg bg-[#D9AE55] text-[#1A1300] font-bold">
+                <div className="p-3 rounded-lg bg-[#F5C518] text-[#0A0A0A] font-bold">
                   <span className="block">--gold</span>
-                  <span>#D9AE55</span>
+                  <span>#F5C518</span>
                 </div>
-                <div className="p-3 rounded-lg bg-[#F0C873] text-[#1A1300] font-bold">
+                <div className="p-3 rounded-lg bg-[#FFD633] text-[#0A0A0A] font-bold">
                   <span className="block">--gold-strong</span>
-                  <span>#F0C873</span>
+                  <span>#FFD633</span>
                 </div>
               </div>
             </div>
 
             {/* Buttons & Tooltips */}
-            <div className="p-6 rounded-2xl bg-[#12141A] border border-[#262A33]">
-              <h3 className="font-display text-lg font-bold text-[#F3F1EA] mb-4">
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#2A2A2A]">
+              <h3 className="font-display text-lg font-bold text-[#F8F8F8] mb-4">
                 Buttons & Term Tooltips
               </h3>
               <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -64,7 +64,7 @@ export default function DevComponentsPage() {
                 <Button variant="ghost">Ghost</Button>
               </div>
 
-              <p className="text-sm text-[#A3A8B3] leading-relaxed">
+              <p className="text-sm text-[#888888] leading-relaxed">
                 Test glossary hover/focus: We integrate custom <Term term="API" /> and high-speed{" "}
                 <Term term="CDN" /> architectures, deploying installable <Term term="PWA" /> apps with{" "}
                 <Term term="RAG" /> powered <Term term="LLM" /> assistants.

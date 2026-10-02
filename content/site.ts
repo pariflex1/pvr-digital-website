@@ -38,30 +38,28 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  // [PLACEHOLDER: BRAND_NAME] - see docs/CONTENT_TODO.md
-  brandName: "Digital Services Studio",
+  brandName: "PVR Digital",
   tagline: "Websites, software and AI that bring you customers.",
   headlines: {
     primary: "Websites, software and AI that bring you customers.",
     alt1: "We build it. We automate it. We advertise it.",
     alt2: "From first click to closed deal, all in one studio."
   },
-  // [PLACEHOLDER: DOMAIN]
-  domain: process.env.NEXT_PUBLIC_SITE_URL || "https://example.com",
-  // [PLACEHOLDER: WHATSAPP_NUMBER_INTL]
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999",
-  whatsappNumberIntl: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999",
-  // [PLACEHOLDER: PHONE, EMAIL, LOCATION]
-  phone: "+91 99999 99999",
-  email: "hello@example.com",
-  city: "Mumbai",
-  state: "Maharashtra",
+  domain: process.env.NEXT_PUBLIC_SITE_URL || "https://pvdigital.in",
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "916394172884",
+  whatsappNumberIntl: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "916394172884",
+  // [PLACEHOLDER: EMAIL] — awaiting owner input
+  phone: "+91 63941 72884",
+  email: "hello@pvdigital.in",
+  city: "Jhansi",
+  state: "Uttar Pradesh",
   country: "India",
   hours: "Mon – Sat, 10:00 AM – 7:00 PM IST",
   responsePromise: "We typically reply within 1 hour during business hours.",
   
   navLinks: [
     { label: "Services", href: "/services" },
+    { label: "Projects", href: "/#projects" },
     { label: "Industries", href: "/industries/real-estate" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" }
@@ -82,7 +80,7 @@ export const siteConfig: SiteConfig = {
   ],
 
   features: {
-    workSectionEnabled: false, // Per Section 5.1.8 & Section 14: hidden until verified case studies supplied
+    workSectionEnabled: true,
     aiAssistantEnabled: false, // P1 feature
     blogEnabled: false // P2 feature
   }

@@ -9,7 +9,7 @@ import { FAQAccordion } from "@/components/accordion/FAQAccordion";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { generateServiceSchema, generateFaqSchema } from "@/lib/seo";
-import { MessageCircle, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { MessageCircle, CheckCircle2, ArrowRight, Sparkles, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 interface PageProps {
@@ -28,8 +28,14 @@ export async function generateMetadata({ params }: PageProps) {
   if (!service) return {};
 
   return {
-    title: `${service.title} | ${service.scope}`,
-    description: service.coreValue
+    title: `${service.title} | PVR Digital — Jhansi, India`,
+    description: `${service.coreValue} PVR Digital delivers ${service.title.toLowerCase()} solutions for businesses across Jhansi and all of India.`,
+    alternates: { canonical: `/services/${slug}` },
+    openGraph: {
+      title: `${service.title} | PVR Digital`,
+      description: service.coreValue,
+      url: `https://pvdigital.in/services/${slug}`
+    }
   };
 }
 
@@ -47,7 +53,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     pagePath: `/services/${service.slug}`
   });
 
-  // Service-specific FAQ seeds // DRAFT-REVIEW
   const serviceFaqs = [
     {
       question: `How long does an average ${service.title} project take?`,
@@ -70,7 +75,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const faqSchema = generateFaqSchema(serviceFaqs);
 
   return (
-    <div className="bg-[#0A0B0F]">
+    <div className="bg-[#070709] min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -80,20 +85,25 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* 1. Hero */}
-      <section className="section-dark py-16 md:py-24 border-b border-[#262A33] bg-grain">
-        <Container>
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#12141A] border border-[#D9AE55]/30 text-xs font-semibold text-[#D9AE55]">
+      {/* 1. Cinematic Service Hero */}
+      <section className="relative py-20 md:py-32 border-b border-white/[0.08] overflow-hidden">
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[140px] opacity-15 bg-[#F5C518] pointer-events-none -z-0"
+          aria-hidden="true"
+        />
+
+        <Container size="wide" className="relative z-10">
+          <div className="max-w-4xl space-y-6">
+            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-[#F5C518]/30">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{service.scope}</span>
+              <span>{service.number} / {service.scope}</span>
             </div>
 
-            <h1 className="h1-fluid font-bold text-[#F3F1EA] tracking-tight">
+            <h1 className="h1-hero text-white tracking-tight uppercase">
               {service.title}
             </h1>
 
-            <p className="text-[18px] md:text-[21px] text-[#A3A8B3] leading-relaxed">
+            <p className="text-[18px] md:text-[21px] text-[#8E94A4] leading-relaxed max-w-3xl">
               {service.intro}
             </p>
 
@@ -103,16 +113,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 variant="primary"
                 size="lg"
               >
-                Get a free quote
+                <span>Request Project Proposal</span>
+                <ArrowUpRight className="w-4 h-4" />
               </Button>
 
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 min-h-[54px] px-8 rounded-full bg-[#12141A] border border-[#262A33] text-[#F3F1EA] font-semibold hover:border-[#D9AE55] hover:text-[#D9AE55] transition-all"
+                className="inline-flex items-center gap-2 min-h-[52px] px-8 rounded-full bg-[#12141D] border border-white/10 text-white font-semibold text-sm hover:border-[#F5C518] hover:text-[#F5C518] transition-all"
               >
-                <MessageCircle className="w-5 h-5 text-[#D9AE55]" />
+                <MessageCircle className="w-4 h-4 text-[#F5C518]" />
                 <span>Discuss on WhatsApp</span>
               </a>
             </div>
@@ -120,40 +131,40 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </Container>
       </section>
 
-      {/* 2. What is Included (Catalogue Deliverables) */}
-      <section className="section-light py-20 border-b border-[var(--line)]">
-        <Container>
+      {/* 2. What is Included (Deliverables Grid) */}
+      <section className="py-24 sm:py-32 border-b border-white/[0.08]">
+        <Container size="wide">
           <SectionHeading
-            eyebrow="Included Deliverables"
+            eyebrow="INCLUDED DELIVERABLES"
             title={`All ${service.items.length} Solutions in ${service.title}`}
             description={service.coreValue}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {service.items.map((item, index) => (
               <div
                 key={item.id}
-                className="p-6 sm:p-8 rounded-2xl bg-white border border-[#D9DCE3] shadow-sm hover:border-[#D9AE55] transition-colors flex flex-col justify-between"
+                className="p-8 rounded-2xl bg-[#0E1016] border border-white/[0.08] hover:border-[#F5C518]/50 transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-[#9A6F12] px-2.5 py-1 rounded-md bg-[#9A6F12]/10">
-                      Solution {String(index + 1).padStart(2, "0")}
+                    <span className="font-mono text-xs font-bold text-[#F5C518] px-2.5 py-1 rounded bg-[#F5C518]/10 border border-[#F5C518]/20">
+                      SOLUTION {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-xl font-bold text-[#14161B] mb-3">
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-[#F5C518] transition-colors">
                     {item.title}
                   </h3>
 
-                  <p className="text-[15px] text-[#515866] leading-relaxed mb-4">
+                  <p className="text-[15px] text-[#8E94A4] leading-relaxed mb-6">
                     {item.description}
                   </p>
                 </div>
 
                 {item.bestFor && (
-                  <div className="pt-3 border-t border-[#D9DCE3] text-xs text-[#14161B] font-medium">
-                    <span className="text-[#9A6F12] font-semibold">Best for: </span>
+                  <div className="pt-4 border-t border-white/[0.06] font-mono text-xs text-white/90">
+                    <span className="text-[#F5C518] font-semibold">BEST FOR: </span>
                     {item.bestFor}
                   </div>
                 )}
@@ -164,22 +175,22 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </section>
 
       {/* 3. Who It Is For */}
-      <section className="section-light-alt py-20 border-b border-[var(--line)]">
-        <Container>
+      <section className="py-24 sm:py-32 border-b border-white/[0.08]">
+        <Container size="wide">
           <SectionHeading
-            eyebrow="Target Fit"
-            title="Who This Service Is Built For"
-            description="Designed specifically to solve high-friction bottlenecks for operational leaders and growing businesses."
+            eyebrow="TARGET FIT"
+            title="Who This Service Is Engineered For"
+            description="Designed specifically to eliminate high-friction operational bottlenecks for growing businesses."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {service.whoItIsFor.map((point, index) => (
               <div
                 key={index}
-                className="p-6 rounded-2xl bg-white border border-[#D9DCE3] shadow-sm flex items-start gap-4"
+                className="p-8 rounded-2xl bg-[#0E1016] border border-white/[0.08] flex items-start gap-4"
               >
-                <CheckCircle2 className="w-6 h-6 text-[#9A6F12] shrink-0 mt-0.5" />
-                <p className="text-[15px] text-[#14161B] font-medium leading-relaxed">
+                <CheckCircle2 className="w-5 h-5 text-[#F5C518] shrink-0 mt-0.5" />
+                <p className="text-[15px] text-white/90 font-medium leading-relaxed">
                   {point}
                 </p>
               </div>
@@ -188,13 +199,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </Container>
       </section>
 
-      {/* 4. How It Works (Process tailored to the line) */}
-      <section className="section-light py-20 border-b border-[var(--line)]">
-        <Container>
+      {/* 4. How It Works (Delivery Process) */}
+      <section className="py-24 sm:py-32 border-b border-white/[0.08]">
+        <Container size="wide">
           <SectionHeading
-            eyebrow="Step-by-Step Delivery"
-            title="How We Deliver Your Project"
-            description="Our structured 4-step framework ensures complete alignment, zero delays, and guaranteed outcomes."
+            eyebrow="STEP-BY-STEP WORKFLOW"
+            title="How We Execute Your Project"
+            description="Our structured 4-step framework guarantees alignment, rapid iteration, and fixed delivery dates."
           />
 
           <StepList
@@ -208,35 +219,35 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </Container>
       </section>
 
-      {/* 5. Related Services */}
-      <section className="section-dark py-20 border-b border-[#262A33]">
-        <Container>
+      {/* 5. Recommended Service Pairings */}
+      <section className="py-24 sm:py-32 border-b border-white/[0.08]">
+        <Container size="wide">
           <SectionHeading
-            eyebrow="Better Together"
+            eyebrow="COMPLEMENTARY CAPABILITIES"
             title="Recommended Service Pairings"
             description="Supercharge your investment by combining related studio capabilities into a unified pipeline."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {service.relatedServices.map((related) => (
               <Link
                 key={related.slug}
                 href={`/services/${related.slug}`}
-                className="group p-8 rounded-2xl bg-[#12141A] border border-[#262A33] hover:border-[#D9AE55] transition-all flex flex-col justify-between"
+                className="group p-8 sm:p-10 rounded-3xl bg-[#0E1016] border border-white/[0.08] hover:border-[#F5C518] transition-all flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-xs uppercase tracking-wider font-semibold text-[#D9AE55] block mb-2">
-                    Recommended Pairing
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#F5C518] block mb-3 font-semibold">
+                    RECOMMENDED PAIRING
                   </span>
-                  <h3 className="font-display text-2xl font-bold text-[#F3F1EA] group-hover:text-[#D9AE55] transition-colors mb-3">
+                  <h3 className="font-display text-2xl font-bold text-white group-hover:text-[#F5C518] transition-colors mb-3">
                     {related.title}
                   </h3>
-                  <p className="text-sm text-[#A3A8B3] leading-relaxed">
+                  <p className="text-[15px] text-[#8E94A4] leading-relaxed">
                     {related.pairingReason}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#262A33] flex items-center justify-between text-xs font-semibold text-[#D9AE55]">
+                <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono font-semibold text-[#F5C518]">
                   <span>Explore {related.title}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -247,15 +258,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </section>
 
       {/* 6. FAQ */}
-      <section className="section-light py-20 border-b border-[var(--line)]">
-        <Container>
+      <section className="py-24 sm:py-32 border-b border-white/[0.08]">
+        <Container size="wide">
           <SectionHeading
-            eyebrow="Common Questions"
+            eyebrow="COMMON QUESTIONS"
             title={`${service.title} FAQs`}
             description="Clear answers regarding scope, integrations, timelines, and technical requirements."
           />
 
-          <div className="max-w-3xl mx-auto bg-white p-6 sm:p-10 rounded-2xl border border-[#D9DCE3]">
+          <div className="max-w-4xl mx-auto p-6 sm:p-10 rounded-3xl bg-[#0E1016] border border-white/[0.08]">
             <FAQAccordion faqs={serviceFaqs} />
           </div>
         </Container>
@@ -263,8 +274,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {/* 7. CTA Band */}
       <FinalCta
-        headline={`Ready to get started with ${service.title}?`}
-        subheadline={`Get a custom quote tailored to your exact operational requirements, or message us directly on WhatsApp.`}
+        headline={`Ready to Implement ${service.title}?`}
+        subheadline="Get a transparent quote tailored to your exact operational requirements, or message us directly on WhatsApp."
         serviceTitle={service.title}
       />
     </div>

@@ -2,10 +2,12 @@ import { siteConfig } from "@/content/site";
 import { FAQItem } from "@/content/faqs";
 import { ServiceLine } from "@/content/services";
 
+// ─── Organization / LocalBusiness ────────────────────────────────────────────
+
 export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": ["ProfessionalService", "LocalBusiness"],
     name: siteConfig.brandName,
     url: siteConfig.domain,
     description: siteConfig.tagline,
@@ -15,15 +17,41 @@ export function generateOrganizationSchema() {
       "@type": "PostalAddress",
       addressLocality: siteConfig.city,
       addressRegion: siteConfig.state,
-      addressCountry: siteConfig.country
+      addressCountry: "IN",
+      postalCode: "284001" // Jhansi postal code — [PLACEHOLDER: ADDRESS_FULL] for street
     },
-    areaServed: {
-      "@type": "Country",
-      name: "India"
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "25.4484",  // Jhansi, UP
+      longitude: "78.5685"
     },
-    openingHours: "Mo-Sa 10:00-19:00"
+    areaServed: [
+      { "@type": "City", name: "Jhansi" },
+      { "@type": "State", name: "Uttar Pradesh" },
+      { "@type": "Country", name: "India" }
+    ],
+    openingHours: "Mo-Sa 10:00-19:00",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: siteConfig.phone,
+      availableLanguage: ["English", "Hindi"]
+    },
+    sameAs: [
+      // [PLACEHOLDER: SOCIAL_LINKS] — add LinkedIn, Instagram, Facebook URLs
+    ],
+    knowsAbout: [
+      "Website Development",
+      "Web Application Development",
+      "AI Chatbot Development",
+      "WhatsApp Automation",
+      "Meta Advertising",
+      "SEO"
+    ]
   };
 }
+
+// ─── Service Schema ───────────────────────────────────────────────────────────
 
 export function generateServiceSchema(service: ServiceLine) {
   return {
@@ -31,15 +59,15 @@ export function generateServiceSchema(service: ServiceLine) {
     "@type": "Service",
     serviceType: service.title,
     provider: {
-      "@type": "ProfessionalService",
+      "@type": "LocalBusiness",
       name: siteConfig.brandName,
       url: siteConfig.domain
     },
     description: service.intro,
-    areaServed: {
-      "@type": "Country",
-      name: "India"
-    },
+    areaServed: [
+      { "@type": "City", name: "Jhansi" },
+      { "@type": "Country", name: "India" }
+    ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: service.scope,
@@ -56,6 +84,8 @@ export function generateServiceSchema(service: ServiceLine) {
   };
 }
 
+// ─── FAQ Schema ───────────────────────────────────────────────────────────────
+
 export function generateFaqSchema(faqs: FAQItem[]) {
   return {
     "@context": "https://schema.org",
@@ -71,6 +101,8 @@ export function generateFaqSchema(faqs: FAQItem[]) {
   };
 }
 
+// ─── Breadcrumb Schema ────────────────────────────────────────────────────────
+
 export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -81,5 +113,30 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
       name: item.name,
       item: item.url
     }))
+  };
+}
+
+// ─── WebPage Schema ───────────────────────────────────────────────────────────
+
+export function generateWebPageSchema(opts: {
+  title: string;
+  description: string;
+  url: string;
+  breadcrumbs?: { name: string; url: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: opts.title,
+    description: opts.description,
+    url: opts.url,
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.brandName,
+      url: siteConfig.domain
+    },
+    ...(opts.breadcrumbs && {
+      breadcrumb: generateBreadcrumbSchema(opts.breadcrumbs)
+    })
   };
 }

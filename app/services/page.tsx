@@ -6,40 +6,56 @@ import { ServicesAccordion } from "@/components/accordion/ServicesAccordion";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Button } from "@/components/ui/Button";
 import { servicesData, totalServiceItems } from "@/content/services";
-import { Sparkles, HelpCircle } from "lucide-react";
+import { Sparkles, HelpCircle, ArrowUpRight } from "lucide-react";
 
 export const metadata = {
-  title: "Complete Digital Services Catalogue (44 Solutions)",
-  description: "Browse all 44 digital solutions across Website Development, Web & App Development, AI Solutions & Automation, and Meta Advertising."
+  title: "Digital Services | Websites, Software & AI — PVR Digital Jhansi",
+  description:
+    "Browse all 44 digital solutions from PVR Digital: Website Development, Custom Web Apps, AI & WhatsApp Automation, and Meta Ad Campaigns. Based in Jhansi, serving all of India.",
+  alternates: { canonical: "/services" }
 };
 
 export default function ServicesHubPage() {
   return (
-    <div className="bg-[#0A0B0F]">
+    <div className="bg-[#070709] min-h-screen">
       {/* Services Hub Hero */}
-      <section className="section-dark py-16 md:py-24 border-b border-[#262A33] bg-grain">
-        <Container>
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D9AE55]/10 text-[#D9AE55] border border-[#D9AE55]/30">
+      <section className="relative py-20 md:py-32 border-b border-white/[0.08] overflow-hidden">
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[140px] opacity-15 bg-[#F5C518] pointer-events-none -z-0"
+          aria-hidden="true"
+        />
+
+        <Container size="wide" className="relative z-10">
+          <div className="max-w-4xl space-y-6">
+            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-[#F5C518]/30">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Executive Service Catalogue</span>
+              <span>EXECUTIVE DELIVERABLES INDEX</span>
             </div>
 
-            <h1 className="h1-fluid font-bold text-[#F3F1EA] tracking-tight">
-              44 Specialized Services. One Cohesive Studio.
+            <h1 className="h1-hero text-white tracking-tight uppercase">
+              44 Specialized Services. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5C518] to-[#FFDE59]">
+                One Unified Studio.
+              </span>
             </h1>
 
-            <p className="text-[17px] md:text-[20px] text-[#A3A8B3] leading-relaxed">
-              We eliminate the friction between your marketing website, custom operational tools, automated WhatsApp responders, and paid Meta campaigns. Explore our complete scope of {totalServiceItems} deliverables below.
+            <p className="text-[17px] md:text-[20px] text-[#8E94A4] leading-relaxed max-w-2xl">
+              We eliminate the friction between your marketing frontend, custom operational tools, automated WhatsApp triage, and paid Meta campaigns. Explore our complete scope of {totalServiceItems} deliverables below.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* 4 Service Domain Overview Cards */}
-      <section className="section-dark py-16 border-b border-[#262A33]">
-        <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 4 Core Competency Cards */}
+      <section className="py-20 sm:py-28 border-b border-white/[0.08]">
+        <Container size="wide">
+          <SectionHeading
+            eyebrow="CORE DOMAINS"
+            title="Four Specialized Competencies"
+            description="Built to function independently or compound together into an automated revenue system."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {servicesData.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
@@ -48,36 +64,37 @@ export default function ServicesHubPage() {
       </section>
 
       {/* Full Catalogue Section with Services Accordion */}
-      <section id="catalogue" className="section-light py-20 border-b border-[var(--line)]">
-        <Container>
+      <section id="catalogue" className="py-24 sm:py-32 border-b border-white/[0.08]">
+        <Container size="wide">
           <SectionHeading
-            eyebrow="Detailed Breakdown"
-            title="Full Service Catalogue & Deliverables"
-            description="Explore exact deliverables, operational scopes, and plain-language definitions for every solution."
+            eyebrow="EXHAUSTIVE DELIVERABLES"
+            title="Complete Scope of 44 Digital Solutions"
+            description="Explore exact deliverables, operational scopes, and plain-language definitions for every capability."
           />
 
-          <div className="bg-white p-6 sm:p-10 rounded-2xl border border-[#D9DCE3] shadow-sm mb-12">
+          <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-[#0E1016] border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.6)] mb-16">
             <ServicesAccordion />
           </div>
 
-          {/* 'Not sure what you need?' Block per Section 5.2 */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-[#ECEEF2] border border-[#D9DCE3] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-xl">
-              <div className="flex items-center gap-2 text-[#9A6F12] font-semibold text-sm">
-                <HelpCircle className="w-5 h-5" />
-                <span>Not sure which solution fits your current stage?</span>
+          {/* 'Not sure what you need?' Consultative Card */}
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#0F1118] border border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 text-[#F5C518] font-mono text-xs uppercase tracking-wider font-semibold">
+                <HelpCircle className="w-4 h-4" />
+                <span>UNSURE WHICH ARCHITECTURE FITS YOUR CURRENT STAGE?</span>
               </div>
-              <h3 className="font-display text-2xl font-bold text-[#14161B]">
-                Tell us your business goal and we’ll recommend the right stack.
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight uppercase">
+                Tell us your business target and we’ll architect the right stack.
               </h3>
-              <p className="text-sm text-[#515866] leading-relaxed">
+              <p className="text-[15px] text-[#8E94A4] leading-relaxed">
                 Take our 2-minute project wizard or chat with us directly on WhatsApp to get tailored recommendations without any sales pressure.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <Button href="/contact" variant="primary" size="default">
-                Get a tailored quote
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
+              <Button href="/contact" variant="primary" size="lg">
+                <span>Configure Project</span>
+                <ArrowUpRight className="w-4 h-4" />
               </Button>
             </div>
           </div>

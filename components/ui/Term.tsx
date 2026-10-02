@@ -50,7 +50,7 @@ export function Term({ term, customExplanation, children }: TermProps) {
         onMouseLeave={() => setIsOpen(false)}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
-        className="inline font-medium underline decoration-[#D9AE55]/60 decoration-dashed underline-offset-4 hover:decoration-[#D9AE55] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9AE55] rounded-sm transition-colors text-inherit cursor-help"
+        className="inline font-medium underline decoration-[#F5C518]/60 decoration-dashed underline-offset-4 hover:decoration-[#F5C518] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F5C518] rounded-sm transition-colors text-inherit cursor-help"
         aria-expanded={isOpen}
         aria-label={`Definition of ${term}`}
       >
@@ -61,14 +61,14 @@ export function Term({ term, customExplanation, children }: TermProps) {
         <span
           role="tooltip"
           className={cn(
-            "absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 rounded-xl bg-[#12141A] text-[#F3F1EA] text-xs leading-relaxed border border-[#262A33] shadow-xl pointer-events-none transition-all duration-200 animate-in fade-in zoom-in-95",
-            "after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-[#12141A]"
+            "absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 rounded-xl bg-[#141414] text-[#F8F8F8] text-xs leading-relaxed border border-[#2A2A2A] shadow-xl pointer-events-none transition-all duration-200 animate-in fade-in zoom-in-95",
+            "after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-[#141414]"
           )}
         >
-          <span className="block font-semibold text-[#D9AE55] mb-1 font-display tracking-tight text-[13px]">
+          <span className="block font-semibold text-[#F5C518] mb-1 font-display tracking-tight text-[13px]">
             {term}
           </span>
-          <span className="block text-[#A3A8B3]">{explanation}</span>
+          <span className="block text-[#888888]">{explanation}</span>
         </span>
       )}
     </span>

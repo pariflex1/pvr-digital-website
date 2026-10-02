@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
-import { MessageCircle, Sparkles } from "lucide-react";
+import { MessageCircle, Sparkles, ArrowUpRight } from "lucide-react";
 
 interface FinalCtaProps {
   headline?: string;
@@ -14,7 +14,7 @@ interface FinalCtaProps {
 }
 
 export function FinalCta({
-  headline = "Ready to build digital systems that bring you customers?",
+  headline = "Ready to Build Systems That Compound Your Revenue?",
   subheadline = "Whether you need a high-converting website, an automated WhatsApp chatbot, custom business software, or targeted Meta ads, we are ready to discuss your project.",
   serviceTitle
 }: FinalCtaProps) {
@@ -24,24 +24,24 @@ export function FinalCta({
   });
 
   return (
-    <section className="relative overflow-hidden bg-[#0A0B0F] border-t border-[#262A33] py-20 md:py-28">
-      {/* Ambient gold glow */}
+    <section className="relative overflow-hidden bg-[#070709] border-t border-white/[0.08] py-28 sm:py-36">
+      {/* Cinematic Ambient Gold Glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full blur-[140px] opacity-20 bg-[#D9AE55]/40 pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] opacity-20 bg-[#F5C518] pointer-events-none -z-0"
         aria-hidden="true"
       />
 
-      <Container className="relative z-10 text-center max-w-3xl space-y-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D9AE55]/10 text-[#D9AE55] border border-[#D9AE55]/30">
+      <Container size="normal" className="relative z-10 text-center space-y-8">
+        <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-[#F5C518]/30">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Start Your Conversation Today</span>
+          <span>START YOUR CONVERSATION TODAY</span>
         </div>
 
-        <h2 className="h2-fluid font-bold text-[#F3F1EA] tracking-tight">
+        <h2 className="h2-editorial text-white tracking-tight uppercase max-w-4xl mx-auto break-words">
           {headline}
         </h2>
 
-        <p className="text-[17px] md:text-[19px] text-[#A3A8B3] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-[17px] sm:text-[19px] text-[#8E94A4] leading-relaxed max-w-2xl mx-auto break-words">
           {subheadline}
         </p>
 
@@ -49,10 +49,11 @@ export function FinalCta({
           <Button
             href="/contact"
             variant="primary"
-            size="lg"
+            size="xl"
             onClick={() => trackEvent("cta_click", { location: "final_cta", label: "Get a free quote" })}
           >
-            Get a free quote
+            <span>Initialize Your Project</span>
+            <ArrowUpRight className="w-5 h-5" />
           </Button>
 
           <a
@@ -60,11 +61,18 @@ export function FinalCta({
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("whatsapp_click", { placement: "final_cta" })}
-            className="inline-flex items-center justify-center gap-2 min-h-[54px] px-8 rounded-full bg-[#12141A] border border-[#262A33] text-[#F3F1EA] font-semibold hover:border-[#D9AE55] hover:text-[#D9AE55] transition-all"
+            className="inline-flex items-center justify-center gap-2.5 min-h-[60px] px-8 rounded-full bg-[#12141D] border border-white/10 hover:border-[#F5C518]/50 text-white font-semibold text-[15px] transition-all hover:bg-[#1A1D28]"
           >
-            <MessageCircle className="w-5 h-5 text-[#D9AE55]" />
-            <span>Chat on WhatsApp</span>
+            <MessageCircle className="w-5 h-5 text-[#25D366]" />
+            <span>Discuss on WhatsApp</span>
           </a>
+        </div>
+
+        {/* Studio SLA Note */}
+        <div className="pt-6 font-mono text-xs text-[#8E94A4] flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <span className="whitespace-nowrap">&bull; Response SLA: Under 1 hour</span>
+          <span className="whitespace-nowrap">&bull; 100% Code Ownership</span>
+          <span className="whitespace-nowrap">&bull; Flat Milestone Pricing</span>
         </div>
       </Container>
     </section>

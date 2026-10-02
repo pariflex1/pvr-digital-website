@@ -1,61 +1,114 @@
 import React from "react";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Layers, MessageSquareCheck, Zap, LineChart } from "lucide-react";
+import { Sparkles, ArrowUpRight } from "lucide-react";
 
-export const whyUsPoints = [
+export const whyUsManifesto = [
   {
-    icon: Layers,
-    title: "One Team for Web + Software + AI + Ads",
-    description: "Never coordinate between 4 different freelance agencies again. We build the website, the internal CRM, the WhatsApp bot, and the Meta ad campaigns together so data flows seamlessly."
+    index: "01",
+    label: "COHESION",
+    title: "One Unified Studio for Web, Software, AI & Ads",
+    description:
+      "Never coordinate between four different freelance agencies again. We engineer the frontend website, the internal CRM, the WhatsApp bot, and the Meta ad campaigns together so lead data flows automatically without manual spreadsheet export errors.",
+    metric: "0",
+    metricLabel: "Agency Coordination Overhead"
   },
   {
-    icon: MessageSquareCheck,
-    title: "WhatsApp-First Communication",
-    description: "We work directly on WhatsApp group chats with your team. Quick video Loom demos, instant question responses, and zero ticketing bureaucracy."
+    index: "02",
+    label: "VELOCITY",
+    title: "Direct WhatsApp Engineering Communication",
+    description:
+      "We work directly on WhatsApp group chats with your leadership team. Fast Loom screen recordings, immediate technical answers, and zero bureaucratic ticketing systems.",
+    metric: "< 1hr",
+    metricLabel: "Average Business-Hour Reply SLA"
   },
   {
-    icon: Zap,
-    title: "Sub-2-Second Mobile Speed",
-    description: "Over 80% of your buyers browse on smartphones on 4G networks. We engineer lightweight, static-optimized code passing Google Core Web Vitals with 95+ Lighthouse scores."
+    index: "03",
+    label: "LATENCY",
+    title: "Sub-2-Second Mobile Benchmark on 4G",
+    description:
+      "Over 80% of Indian buyers browse on smartphones. We reject heavy WordPress themes and bloated page builders. We engineer lightweight, static-optimized Next.js code with 95+ Google Lighthouse scores.",
+    metric: "0.4s",
+    metricLabel: "Average Mobile TTFB"
   },
   {
-    icon: LineChart,
-    title: "Transparent Process & ROI Reporting",
-    description: "Clear fixed milestones, weekly progress reports, and transparent accounting of ad spend versus verified lead acquisition."
+    index: "04",
+    label: "INTEGRITY",
+    title: "100% Code & IP Ownership with Fixed Milestones",
+    description:
+      "You receive full source code repository ownership, hosting administrator access, and intellectual property from day one. No vendor lock-in, no hidden recurring license fees.",
+    metric: "100%",
+    metricLabel: "Client IP & Source Code Ownership"
   }
 ];
 
 export function WhyUs() {
   return (
-    <section className="section-light py-20 border-b border-[var(--line)]">
-      <Container>
-        <SectionHeading
-          eyebrow="The Studio Difference"
-          title="Why growing businesses partner with us"
-          description="Built specifically for Indian business owners who value speed, accountability, and real qualified customer enquiries over agency buzzwords."
-        />
+    <section className="relative bg-[#070709] py-28 sm:py-40 border-b border-white/[0.08] overflow-hidden">
+      {/* Background ambient lighting */}
+      <div
+        className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full blur-[140px] opacity-10 bg-[#F5C518] pointer-events-none -z-0"
+        aria-hidden="true"
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {whyUsPoints.map((point, index) => {
-            const Icon = point.icon;
-            return (
-              <div
-                key={index}
-                className="p-8 rounded-2xl bg-white border border-[var(--line)] shadow-sm hover:border-[#D9AE55] transition-colors"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#D9AE55]/10 text-[#9A6F12] flex items-center justify-center mb-6 border border-[#D9AE55]/20">
-                  <Icon className="w-6 h-6" />
+      <Container size="wide" className="relative z-10">
+        {/* Editorial Section Introduction */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16 sm:pb-24 border-b border-white/[0.08]">
+          <div className="lg:col-span-8 space-y-4">
+            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>THE STUDIO STANDARD</span>
+            </div>
+
+            <h2 className="h2-editorial text-white tracking-tight uppercase">
+              Engineered for Businesses That Value Measurable Growth Over Jargon.
+            </h2>
+          </div>
+
+          <div className="lg:col-span-4 flex items-end">
+            <p className="text-[16px] text-[#8E94A4] leading-relaxed">
+              Most digital agencies sell aesthetic templates that fail to capture qualified customer leads. We treat your digital presence as an automated commercial engine.
+            </p>
+          </div>
+        </div>
+
+        {/* 4-Column Architectural Manifesto (Editorial asymmetric rows) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-16">
+          {whyUsManifesto.map((item) => (
+            <div
+              key={item.index}
+              className="flex flex-col justify-between p-8 rounded-2xl bg-[#0D0F15] border border-white/[0.08] hover:border-[#F5C518]/50 transition-all duration-300 group"
+            >
+              <div>
+                {/* Monospace Indicator */}
+                <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.06]">
+                  <span className="font-mono text-xs font-bold text-[#F5C518] tracking-widest">
+                    {item.index} / {item.label}
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-[#F5C518] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
-                <h3 className="font-display text-xl font-bold text-[#14161B] mb-3">
-                  {point.title}
+
+                {/* Principle Title */}
+                <h3 className="font-display text-xl font-bold text-white mb-4 group-hover:text-[#F5C518] transition-colors leading-snug break-words">
+                  {item.title}
                 </h3>
-                <p className="text-[15px] text-[#515866] leading-relaxed">
-                  {point.description}
+
+                {/* Principle Narrative */}
+                <p className="text-[14px] text-[#8E94A4] leading-relaxed mb-8 break-words">
+                  {item.description}
                 </p>
               </div>
-            );
-          })}
+
+              {/* Concrete Operational Metric */}
+              <div className="pt-6 border-t border-white/[0.06]">
+                <div className="font-display text-3xl font-extrabold text-[#F5C518]">
+                  {item.metric}
+                </div>
+                <div className="font-mono text-[11px] uppercase tracking-wider text-[#8E94A4] mt-1">
+                  {item.metricLabel}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </Container>
     </section>
