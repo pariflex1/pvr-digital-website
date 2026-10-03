@@ -1,11 +1,33 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { servicesData, ServiceItem } from "@/content/services";
+import React, { useState } from "react";
+import { servicesData } from "@/content/services";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+
+// Thumbnail image and badge for each service category
+const categoryMeta: Record<string, { image: string; badge: string }> = {
+  "website-development": {
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=400&auto=format&fit=crop",
+    badge: "#Web Design"
+  },
+  "web-app-development": {
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=400&auto=format&fit=crop",
+    badge: "#Web Apps"
+  },
+  "ai-automation": {
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=400&auto=format&fit=crop",
+    badge: "#AI & Bots"
+  },
+  "meta-ads": {
+    image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=400&auto=format&fit=crop",
+    badge: "#Meta Ads"
+  }
+};
+
+const INITIAL_SHOW = 4;
 
 interface ServicesAccordionProps {
   initialServiceSlug?: string;
@@ -18,288 +40,171 @@ export function ServicesAccordion({
   initialItemSlug,
   className
 }: ServicesAccordionProps) {
-  const [activeLevel1, setActiveLevel1] = useState<string>(
-    initialServiceSlug || servicesData[0]?.slug || ""
-  );
-  const [activeLevel2, setActiveLevel2] = useState<string>(initialItemSlug || "");
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+  // tracks which categories are fully expanded (showing all items)
+  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set());
 
-  const level1Refs = useRef<Map<string, HTMLButtonElement>>(new Map());
-  const level2Refs = useRef<Map<string, HTMLButtonElement>>(new Map());
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Sync hash deep-linking
-  useEffect(() => {
-    function parseHash() {
-      if (typeof window === "undefined") return;
-      const hash = window.location.hash.replace("#", "");
-      if (!hash) return;
-
-      const parts = hash.split("/");
-      const serviceSlug = parts[0];
-      const itemSlug = parts[1];
-
-      const foundService = servicesData.find((s) => s.slug === serviceSlug);
-      if (foundService) {
-        setActiveLevel1(serviceSlug);
-        if (itemSlug && foundService.items.some((i) => i.slug === itemSlug)) {
-          setActiveLevel2(itemSlug);
-        }
-      }
-    }
-
-    parseHash();
-    window.addEventListener("hashchange", parseHash);
-    return () => window.removeEventListener("hashchange", parseHash);
-  }, []);
-
-  const updateHash = (l1: string, l2: string) => {
-    if (typeof window === "undefined") return;
-    const newHash = l2 ? `#${l1}/${l2}` : `#${l1}`;
-    window.history.replaceState(null, "", newHash);
+  const handleToggle = (slug: string) => {
+    setOpenSlug((prev) => (prev === slug ? null : slug));
+    trackEvent("accordion_open", { level: 1, item: slug });
   };
 
-  const handleToggleLevel1 = (serviceSlug: string) => {
-    if (activeLevel1 === serviceSlug) {
-      return;
-    }
-
-    setActiveLevel1(serviceSlug);
-    setActiveLevel2("");
-    updateHash(serviceSlug, "");
-    trackEvent("accordion_open", { level: 1, item: serviceSlug });
-
-    if (window.innerWidth < 768) {
-      setTimeout(() => {
-        const btn = level1Refs.current.get(serviceSlug);
-        if (btn) {
-          const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          btn.scrollIntoView({
-            behavior: prefersReduced ? "auto" : "smooth",
-            block: "start"
-          });
-        }
-      }, 50);
-    }
-  };
-
-  const handleToggleLevel2 = (itemSlug: string) => {
-    if (activeLevel2 === itemSlug) {
-      setActiveLevel2("");
-      updateHash(activeLevel1, "");
-    } else {
-      setActiveLevel2(itemSlug);
-      updateHash(activeLevel1, itemSlug);
-      trackEvent("accordion_open", { level: 2, item: itemSlug });
-    }
-  };
-
-  const handleLevel1KeyDown = (e: React.KeyboardEvent, index: number) => {
-    const total = servicesData.length;
-    let nextIndex = -1;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      nextIndex = (index + 1) % total;
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      nextIndex = (index - 1 + total) % total;
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      nextIndex = 0;
-    } else if (e.key === "End") {
-      e.preventDefault();
-      nextIndex = total - 1;
-    }
-
-    if (nextIndex >= 0) {
-      const targetSlug = servicesData[nextIndex].slug;
-      level1Refs.current.get(targetSlug)?.focus();
-    }
-  };
-
-  const handleLevel2KeyDown = (e: React.KeyboardEvent, items: ServiceItem[], index: number) => {
-    const total = items.length;
-    let nextIndex = -1;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      nextIndex = (index + 1) % total;
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      nextIndex = (index - 1 + total) % total;
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      nextIndex = 0;
-    } else if (e.key === "End") {
-      e.preventDefault();
-      nextIndex = total - 1;
-    }
-
-    if (nextIndex >= 0) {
-      const targetSlug = items[nextIndex].slug;
-      level2Refs.current.get(targetSlug)?.focus();
-    }
+  const handleExpand = (slug: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedSlugs((prev) => {
+      const next = new Set(prev);
+      if (next.has(slug)) next.delete(slug);
+      else next.add(slug);
+      return next;
+    });
   };
 
   return (
-    <div ref={containerRef} className={cn("w-full divide-y divide-white/[0.08]", className)}>
-      {servicesData.map((service, l1Index) => {
-        const isL1Open = activeLevel1 === service.slug;
-        const l1ButtonId = `l1-btn-${service.slug}`;
-        const l1PanelId = `l1-panel-${service.slug}`;
+    <div className={cn("w-full flex flex-col gap-3", className)}>
+      {servicesData.map((service) => {
+        const meta = categoryMeta[service.slug] || {
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop",
+          badge: "#Service"
+        };
+        const isOpen = openSlug === service.slug;
+        const isExpanded = expandedSlugs.has(service.slug);
+        const visibleItems = isExpanded
+          ? service.items
+          : service.items.slice(0, INITIAL_SHOW);
+        const hasMore = service.items.length > INITIAL_SHOW;
 
         return (
-          <div key={service.id} className="py-2 transition-colors">
-            {/* Level 1 Header Button */}
+          <div
+            key={service.id}
+            className={cn(
+              "rounded-2xl border transition-all duration-300 overflow-hidden",
+              isOpen
+                ? "border-[#CBE86A] bg-[#FFFFFF]"
+                : "border-[#E4E4E4] bg-[#FFFFFF] hover:border-[#CBE86A]/60"
+            )}
+          >
+            {/* ── Accordion Header ── */}
             <button
-              id={l1ButtonId}
-              ref={(el) => {
-                if (el) level1Refs.current.set(service.slug, el);
-              }}
               type="button"
-              aria-expanded={isL1Open}
-              aria-controls={l1PanelId}
-              onClick={() => handleToggleLevel1(service.slug)}
-              onKeyDown={(e) => handleLevel1KeyDown(e, l1Index)}
-              className="w-full min-h-[64px] py-5 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F5C518] focus-visible:outline-offset-2 rounded-xl cursor-pointer"
+              aria-expanded={isOpen}
+              onClick={() => handleToggle(service.slug)}
+              className="w-full flex items-center gap-4 p-4 sm:p-5 text-left cursor-pointer group"
             >
-              <div className="flex items-start sm:items-center gap-4 sm:gap-6">
-                <span className="font-mono text-sm sm:text-base font-bold text-[#F5C518] shrink-0 pt-0.5 sm:pt-0">
-                  {service.number}
-                </span>
-                <div>
-                  <span className="block font-display text-[clamp(1.35rem,4vw,2rem)] font-bold text-white group-hover:text-[#F5C518] transition-colors">
-                    {service.title}
-                  </span>
-                  <span className="block font-mono text-[11px] uppercase tracking-wider text-[#8E94A4] mt-1">
-                    {service.items.length} deliverables &bull; {service.scope}
-                  </span>
-                </div>
+              {/* Left: Thumbnail — hidden on very small screens, visible sm+ */}
+              <div className="hidden sm:block shrink-0 w-[120px] h-[80px] sm:w-[160px] sm:h-[100px] rounded-2xl overflow-hidden bg-[#E4E4E4]">
+                <img
+                  src={meta.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
 
-              {/* Minimalist 36px Round Toggle Indicator */}
+              {/* Middle: Badge + Title — flex-1 with min-w-0 prevents overflow */}
+              <div className="flex-1 min-w-0 space-y-1.5">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#E4E4E4] text-[#9E9E9E] font-body text-[12px] sm:text-[13px] font-medium">
+                  {meta.badge}
+                </span>
+                <h3 className="font-display text-[18px] sm:text-[22px] lg:text-[26px] font-semibold text-[#303030] leading-tight">
+                  {service.title}
+                </h3>
+                <p className="font-body text-[12px] sm:text-[13px] text-[#9E9E9E]">
+                  {service.items.length} deliverables · {service.scope}
+                </p>
+              </div>
+
+              {/* Right: Toggle — fixed size, never shrinks, never overlaps */}
               <div
                 className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center shrink-0 ml-4 transition-all duration-300 relative border",
-                  isL1Open
-                    ? "bg-[#F5C518] text-[#070709] border-[#F5C518] shadow-[0_0_15px_rgba(245,197,24,0.3)]"
-                    : "bg-white/[0.04] text-[#8E94A4] border-white/10 group-hover:border-[#F5C518]/50 group-hover:text-white"
+                  "shrink-0 ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all duration-300 relative",
+                  isOpen
+                    ? "bg-[#CBE86A] border-[#CBE86A] text-[#303030]"
+                    : "bg-[#F6F6F6] border-[#E4E4E4] text-[#303030]"
                 )}
                 aria-hidden="true"
               >
-                <span className="w-3.5 h-[2px] bg-current rounded-full" />
+                <span className="w-3 sm:w-3.5 h-[2px] bg-current rounded-full" />
                 <span
                   className={cn(
-                    "absolute w-[2px] h-3.5 bg-current rounded-full transition-transform duration-250 ease-out",
-                    isL1Open ? "scale-y-0" : "scale-y-100"
+                    "absolute w-[2px] h-3 sm:h-3.5 bg-current rounded-full transition-transform duration-300",
+                    isOpen ? "scale-y-0" : "scale-y-100"
                   )}
                 />
               </div>
             </button>
 
-            {/* Level 1 Panel */}
+            {/* ── Accordion Content Panel ── */}
             <div
-              id={l1PanelId}
-              role="region"
-              aria-labelledby={l1ButtonId}
-              inert={!isL1Open ? true : undefined}
               className={cn(
                 "grid transition-[grid-template-rows] duration-300 ease-in-out",
-                isL1Open ? "grid-rows-[1fr] opacity-100 visible" : "grid-rows-[0fr] opacity-0 invisible overflow-hidden"
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               )}
             >
               <div className="overflow-hidden">
-                {/* Intro summary banner */}
-                <div className="py-5 px-1 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] text-sm">
-                  <p className="text-[#8E94A4] text-base leading-relaxed max-w-2xl">
+                <div className="px-4 sm:px-5 pb-6 space-y-5">
+                  {/* Intro paragraph */}
+                  <p className="font-body text-[15px] sm:text-[16px] text-[#9E9E9E] leading-relaxed border-t border-[#E4E4E4] pt-5">
                     {service.intro}
                   </p>
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[#F5C518] hover:underline shrink-0"
-                  >
-                    <span>View Dedicated Page</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
 
-                {/* Level 2 Items List */}
-                <div className="divide-y divide-white/[0.05] pt-2">
-                  {service.items.map((item, l2Index) => {
-                    const isL2Open = activeLevel2 === item.slug;
-                    const l2ButtonId = `l2-btn-${item.slug}`;
-                    const l2PanelId = `l2-panel-${item.slug}`;
-
-                    return (
-                      <div key={item.id} className="py-1">
-                        <button
-                          id={l2ButtonId}
-                          ref={(el) => {
-                            if (el) level2Refs.current.set(item.slug, el);
-                          }}
-                          type="button"
-                          aria-expanded={isL2Open}
-                          aria-controls={l2PanelId}
-                          onClick={() => handleToggleLevel2(item.slug)}
-                          onKeyDown={(e) => handleLevel2KeyDown(e, service.items, l2Index)}
-                          className="w-full min-h-[48px] py-3.5 flex items-center justify-between text-left group focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F5C518] rounded-lg cursor-pointer"
-                        >
-                          <span
-                            className={cn(
-                              "text-[15px] sm:text-[16px] font-medium transition-colors",
-                              isL2Open
-                                ? "text-[#F5C518] font-semibold"
-                                : "text-white/90 group-hover:text-white"
-                            )}
-                          >
-                            {item.title}
-                          </span>
-
-                          <div
-                            className={cn(
-                              "w-6 h-6 rounded-full flex items-center justify-center shrink-0 ml-3 transition-all duration-200 relative border",
-                              isL2Open
-                                ? "bg-[#F5C518] text-[#070709] border-[#F5C518]"
-                                : "bg-white/[0.04] text-[#8E94A4] border-white/10 group-hover:text-white"
-                            )}
-                            aria-hidden="true"
-                          >
-                            <span className="w-2.5 h-[1.5px] bg-current rounded-full" />
-                            <span
-                              className={cn(
-                                "absolute w-[1.5px] h-2.5 bg-current rounded-full transition-transform duration-200",
-                                isL2Open ? "scale-y-0" : "scale-y-100"
-                              )}
-                            />
-                          </div>
-                        </button>
-
-                        {/* Level 2 Panel */}
-                        <div
-                          id={l2PanelId}
-                          role="region"
-                          aria-labelledby={l2ButtonId}
-                          inert={!isL2Open ? true : undefined}
-                          className={cn(
-                            "grid transition-[grid-template-rows] duration-250 ease-in-out",
-                            isL2Open ? "grid-rows-[1fr]" : "grid-rows-[0fr] overflow-hidden"
-                          )}
-                        >
-                          <div className="overflow-hidden">
-                            <div className="pb-5 pt-1 max-w-[65ch] space-y-2 text-[15px] leading-relaxed text-[#8E94A4]">
-                              <p>{item.description}</p>
-                              {item.bestFor && (
-                                <p className="text-xs text-white/90 font-mono pt-1">
-                                  <span className="text-[#F5C518] font-bold">BEST FOR: </span>
-                                  {item.bestFor}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                  {/* Sub-services / Deliverables grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {visibleItems.map((item) => (
+                      <div
+                        key={item.id}
+                        className="p-4 rounded-xl bg-[#F6F6F6] border border-[#E4E4E4]"
+                      >
+                        <p className="font-body text-[14px] sm:text-[15px] font-semibold text-[#303030] mb-1">
+                          {item.title}
+                        </p>
+                        {item.bestFor && (
+                          <p className="font-body text-[12px] sm:text-[13px] text-[#9E9E9E] leading-snug">
+                            Best for: {item.bestFor}
+                          </p>
+                        )}
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
+
+                  {/* Footer row */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <p className="font-body text-[13px] sm:text-[14px] text-[#9E9E9E]">
+                      {isExpanded
+                        ? `Showing all ${service.items.length} deliverables`
+                        : `Showing ${visibleItems.length} of ${service.items.length} deliverables`}
+                    </p>
+
+                    <div className="flex items-center gap-3">
+                      {/* Expand / Collapse button */}
+                      {hasMore && (
+                        <button
+                          type="button"
+                          onClick={(e) => handleExpand(service.slug, e)}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-[#303030] text-[#303030] font-body text-[13px] sm:text-[14px] font-semibold hover:bg-[#303030] hover:text-[#FFFFFF] transition-all duration-200"
+                        >
+                          {isExpanded ? (
+                            <>
+                              <ChevronUp className="w-4 h-4" />
+                              <span>Collapse</span>
+                            </>
+                          ) : (
+                            <>
+                              <ChevronDown className="w-4 h-4" />
+                              <span>Expand All</span>
+                            </>
+                          )}
+                        </button>
+                      )}
+
+                      {/* View service page link */}
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#CBE86A] text-[#303030] font-body text-[13px] sm:text-[14px] font-semibold hover:bg-[#D4F469] transition-colors"
+                      >
+                        <span>View Page</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

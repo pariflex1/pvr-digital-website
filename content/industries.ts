@@ -18,7 +18,7 @@ export const industriesData: Record<string, IndustryPageData> = {
     slug: "real-estate",
     title: "Real Estate",
     heroHeadline: "Websites, Meta Ads & WhatsApp Automation for Real Estate Developers",
-    heroSubheadline: "Showcase residential & commercial projects with immersive floor plans, capture verified buyer leads through Facebook & Instagram ads, and qualify prospects on WhatsApp within 30 seconds.",
+    heroSubheadline: "Showcase residential & commercial projects with immersive floor plans, capture verified buyer leads through Meta Ads, and qualify prospects on WhatsApp within 30 seconds.",
     painPoints: [
       "High cost-per-lead and fake numbers from unfiltered ad clicks.",
       "Slow sales follow-up causing warm home buyers to look elsewhere.",

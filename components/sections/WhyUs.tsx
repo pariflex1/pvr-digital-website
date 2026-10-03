@@ -43,67 +43,75 @@ export const whyUsManifesto = [
 
 export function WhyUs() {
   return (
-    <section className="relative bg-[#070709] py-28 sm:py-40 border-b border-white/[0.08] overflow-hidden">
+    <section className="relative bg-primary py-28 sm:py-40 border-b border-surface overflow-hidden">
       {/* Background ambient lighting */}
       <div
-        className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full blur-[140px] opacity-10 bg-[#F5C518] pointer-events-none -z-0"
+        className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full blur-[140px] opacity-10 bg-accent pointer-events-none -z-0"
         aria-hidden="true"
       />
 
       <Container size="wide" className="relative z-10">
         {/* Editorial Section Introduction */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16 sm:pb-24 border-b border-white/[0.08]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16 sm:pb-24 border-b border-surface">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase">
+            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-accent uppercase">
               <Sparkles className="w-3.5 h-3.5" />
               <span>THE STUDIO STANDARD</span>
             </div>
 
-            <h2 className="h2-editorial text-white tracking-tight uppercase">
+            <h2 className="h2-editorial text-text-main tracking-tight uppercase">
               Engineered for Businesses That Value Measurable Growth Over Jargon.
             </h2>
           </div>
 
           <div className="lg:col-span-4 flex items-end">
-            <p className="text-[16px] text-[#8E94A4] leading-relaxed">
+            <p className="text-[16px] text-text-muted leading-relaxed">
               Most digital agencies sell aesthetic templates that fail to capture qualified customer leads. We treat your digital presence as an automated commercial engine.
             </p>
           </div>
         </div>
 
-        {/* 4-Column Architectural Manifesto (Editorial asymmetric rows) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-16">
-          {whyUsManifesto.map((item) => (
-            <div
-              key={item.index}
-              className="flex flex-col justify-between p-8 rounded-2xl bg-[#0D0F15] border border-white/[0.08] hover:border-[#F5C518]/50 transition-all duration-300 group"
-            >
+      {/* 4-Column Architectural Manifesto (Editorial asymmetric rows) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-16">
+        {whyUsManifesto.map((item, idx) => (
+          <div
+            key={item.index}
+            className={`flex flex-col justify-between p-8 rounded-2xl border transition-all duration-300 group ${
+              idx === 0
+                ? "bg-[#0D0F15] border-text-main/[0.08] hover:border-accent/50"
+                : "bg-white border-text-main/[0.08] hover:border-accent/50"
+            }`}
+          >
               <div>
                 {/* Monospace Indicator */}
-                <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.06]">
-                  <span className="font-mono text-xs font-bold text-[#F5C518] tracking-widest">
+                <div className="flex items-center justify-between pb-6 mb-6 border-b border-text-main/[0.06]">
+                  <span className="font-mono text-xs font-bold text-accent tracking-widest">
                     {item.index} / {item.label}
                   </span>
-                  <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-[#F5C518] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-4 h-4 text-text-main/30 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
 
-                {/* Principle Title */}
-                <h3 className="font-display text-xl font-bold text-white mb-4 group-hover:text-[#F5C518] transition-colors leading-snug break-words">
-                  {item.title}
-                </h3>
+            {/* Principle Title */}
+            <h3 className={`font-display text-xl font-bold mb-4 leading-snug break-words ${
+              idx === 0 
+                ? "text-[#cbe86a] group-hover:text-accent transition-colors" 
+                : "text-[#0D0F15]"
+            }`}>
+              {item.title}
+            </h3>
 
                 {/* Principle Narrative */}
-                <p className="text-[14px] text-[#8E94A4] leading-relaxed mb-8 break-words">
+                <p className="text-[14px] text-text-muted leading-relaxed mb-8 break-words">
                   {item.description}
                 </p>
               </div>
 
               {/* Concrete Operational Metric */}
-              <div className="pt-6 border-t border-white/[0.06]">
-                <div className="font-display text-3xl font-extrabold text-[#F5C518]">
+              <div className="pt-6 border-t border-text-main/[0.06]">
+                <div className="font-display text-3xl font-extrabold text-accent">
                   {item.metric}
                 </div>
-                <div className="font-mono text-[11px] uppercase tracking-wider text-[#8E94A4] mt-1">
+                <div className="font-mono text-[11px] uppercase tracking-wider text-text-muted mt-1">
                   {item.metricLabel}
                 </div>
               </div>

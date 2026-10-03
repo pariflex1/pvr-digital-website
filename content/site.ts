@@ -38,7 +38,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  brandName: "PVR Digital",
+  brandName: "PVR Tech",
   tagline: "Websites, software and AI that bring you customers.",
   headlines: {
     primary: "Websites, software and AI that bring you customers.",

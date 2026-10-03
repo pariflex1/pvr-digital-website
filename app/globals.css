@@ -1,54 +1,72 @@
 @import "tailwindcss";
 
 /* ── Typography Imports ────────────────────────────────────────────────────── */
-@import "@fontsource/syne/600.css";
-@import "@fontsource/syne/700.css";
-@import "@fontsource/syne/800.css";
+@import "@fontsource/sora/400.css";
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+@import "@fontsource/sora/800.css";
 
-@import "@fontsource/plus-jakarta-sans/400.css";
-@import "@fontsource/plus-jakarta-sans/500.css";
-@import "@fontsource/plus-jakarta-sans/600.css";
-@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-alt: var(--primary-alt);
+  --color-surface: var(--surface);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  
+  --font-display: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
 
 /* ── Editorial Design Tokens ──────────────────────────────────────────────── */
 :root {
-  /* Obsidian Dark Palette (Primary Architectural Canvas) */
-  --bg-dark:            #070709;
-  --surface-dark:       #0F1116;
-  --surface-dark-elevated: #161822;
-  --surface-dark-active:   #1D202D;
-  --line-dark:          rgba(255, 255, 255, 0.08);
-  --line-dark-hover:    rgba(255, 255, 255, 0.18);
-  --text-dark:          #F8F9FA;
-  --muted-dark:         #8E94A4;
-  --subtle-dark:        #5C6274;
+  /* Light Theme (Default) */
+  --primary: #F6F6F6;
+  --primary-alt: #FFFFFF;
+  --surface: #E4E4E4;
+  --text-main: #303030;
+  --text-muted: #9E9E9E;
+  --accent: #CBE86A;
+}
 
-  /* Accent Gold / Champagne (Restrained, Precision Metric Highlights) */
-  --gold-primary:       #F5C518;
-  --gold-bright:        #FFD94D;
-  --gold-glow:          rgba(245, 197, 24, 0.18);
-  --gold-subtle:        rgba(245, 197, 24, 0.08);
+.dark {
+  /* Dark Theme */
+  --primary: #303030;
+  --primary-alt: #222222;
+  --surface: #1A1A1A;
+  --text-main: #F6F6F6;
+  --text-muted: #9E9E9E;
+  --accent: #CBE86A;
+}
 
-  /* Light Editorial Slate (For intentional high-contrast editorial pauses) */
-  --bg-light:           #0B0D12;
-  --surface-light:      #12151E;
-  --line-light:         rgba(255, 255, 255, 0.09);
-  --text-light:         #F8F9FA;
-  --muted-light:        #9BA1B2;
+/* Fallback variable mappings for backward compatibility if any remain */
+:root {
+  --bg-dark: var(--primary);
+  --surface-dark: var(--surface);
+  --surface-dark-elevated: var(--surface);
+  --surface-dark-active: var(--surface);
+  --line-dark: rgba(158, 158, 158, 0.2);
+  --line-dark-hover: rgba(158, 158, 158, 0.4);
+  --text-dark: var(--text-main);
+  --muted-dark: var(--text-muted);
+  --subtle-dark: var(--text-muted);
 
-  /* Active Root Tokens */
-  --bg:          var(--bg-dark);
-  --surface:     var(--surface-dark);
-  --surface-elevated: var(--surface-dark-elevated);
-  --line:        var(--line-dark);
-  --text:        var(--text-dark);
-  --muted:       var(--muted-dark);
-  --gold:        var(--gold-primary);
+  --gold-primary: var(--accent);
+  --gold-bright: var(--accent);
+  --gold-glow: rgba(203, 232, 106, 0.2);
+  --gold-subtle: rgba(203, 232, 106, 0.1);
 
-  /* Typography Stacks */
-  --font-display: "Syne", "Plus Jakarta Sans", -apple-system, sans-serif;
-  --font-body:    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --bg: var(--primary);
+  --surface: var(--surface);
+  --line: var(--line-dark);
+  --text: var(--text-main);
+  --muted: var(--text-muted);
+  --gold: var(--accent);
 }
 
 /* ── Base Styles ───────────────────────────────────────────────────────────── */
@@ -58,18 +76,28 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light dark;
 }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
+  background-color: var(--primary);
+  color: var(--text-main);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* ── Typography Classes ────────────────────────────────────────────────────── */
@@ -88,16 +116,16 @@ body {
 /* Fluid Editorial Scale */
 .h1-hero {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
-  line-height: 1.02;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.05;
   letter-spacing: -0.04em;
   font-weight: 800;
 }
 
 .h2-editorial {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.8vw, 4rem);
-  line-height: 1.08;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  line-height: 1.1;
   letter-spacing: -0.035em;
   font-weight: 700;
 }
@@ -138,15 +166,12 @@ body {
 }
 
 .editorial-glass {
-  background-color: rgba(15, 17, 22, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: #0F1116;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .editorial-glass-gold {
-  background-color: rgba(15, 17, 22, 0.85);
-  backdrop-filter: blur(20px);
+  background-color: #0F1116;
   border: 1px solid rgba(245, 197, 24, 0.25);
   box-shadow: 0 0 35px rgba(245, 197, 24, 0.08);
 }

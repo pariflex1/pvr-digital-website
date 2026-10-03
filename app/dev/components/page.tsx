@@ -41,7 +41,7 @@ export default function DevComponentsPage() {
                   <span className="block font-semibold">--surface</span>
                   <span className="text-[#888888]">#141414</span>
                 </div>
-                <div className="p-3 rounded-lg bg-[#F5C518] text-[#0A0A0A] font-bold">
+                <div className="p-3 rounded-lg bg-accent text-[#0A0A0A] font-bold">
                   <span className="block">--gold</span>
                   <span>#F5C518</span>
                 </div>
@@ -82,7 +82,7 @@ export default function DevComponentsPage() {
             title="The Services Accordion"
             description="Meta-style hairline rows with plus/minus scale collapse, deep-linking, and strict single-panel focus."
           />
-          <div className="bg-white p-6 sm:p-10 rounded-2xl border border-[#D9DCE3] shadow-sm">
+          <div className="bg-text-main p-6 sm:p-10 rounded-2xl border border-[#D9DCE3] shadow-sm">
             <ServicesAccordion />
           </div>
         </Container>
@@ -124,7 +124,7 @@ export default function DevComponentsPage() {
             title="Frequently Asked Questions"
             description="Expandable plain-language answers tested for keyboard accessibility."
           />
-          <div className="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-2xl border border-[#D9DCE3]">
+          <div className="max-w-3xl mx-auto bg-text-main p-6 sm:p-8 rounded-2xl border border-[#D9DCE3]">
             <FAQAccordion faqs={generalFaqs.slice(0, 5)} />
           </div>
         </Container>

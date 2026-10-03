@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <div className="bg-[#0A0A0A] py-16 md:py-24 text-[#F8F8F8]">
       <Container className="max-w-3xl space-y-8">
         <div>
-          <span className="text-xs uppercase tracking-wider font-semibold text-[#F5C518] block mb-2">
+          <span className="text-xs uppercase tracking-wider font-semibold text-accent block mb-2">
             Legal & Compliance // DRAFT-REVIEW
           </span>
           <h1 className="h2-fluid font-bold tracking-tight text-[#F8F8F8]">

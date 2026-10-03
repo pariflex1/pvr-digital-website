@@ -14,7 +14,7 @@ export function DesktopWhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => trackEvent("whatsapp_click", { placement: "desktop_float" })}
-      className="hidden md:flex fixed bottom-8 right-8 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-transform duration-200 border-2 border-white/20 group"
+      className="hidden md:flex fixed bottom-8 right-8 z-40 w-14 h-14 rounded-full bg-[#25D366] text-text-main items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-transform duration-200 border-2 border-text-main/20 group"
       aria-label="Chat with us on WhatsApp"
       title="Chat on WhatsApp"
     >

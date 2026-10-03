@@ -17,7 +17,7 @@ export default function NotFound() {
   return (
     <div className="bg-[#0A0A0A] min-h-[70vh] flex items-center py-20">
       <Container className="text-center max-w-2xl space-y-6">
-        <span className="font-display font-extrabold text-7xl sm:text-8xl text-[#F5C518] block">
+        <span className="font-display font-extrabold text-7xl sm:text-8xl text-accent block">
           404
         </span>
 
@@ -39,7 +39,7 @@ export default function NotFound() {
               <Link
                 key={s.id}
                 href={`/services/${s.slug}`}
-                className="px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#2A2A2A] hover:border-[#F5C518] text-xs font-medium text-[#F8F8F8] hover:text-[#F5C518] transition-all"
+                className="px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#2A2A2A] hover:border-accent text-xs font-medium text-[#F8F8F8] hover:text-accent transition-all"
               >
                 {s.title}
               </Link>
@@ -58,9 +58,9 @@ export default function NotFound() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 min-h-[48px] px-6 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#F8F8F8] text-sm font-semibold hover:border-[#F5C518] hover:text-[#F5C518] transition-all"
+            className="inline-flex items-center gap-2 min-h-[48px] px-6 rounded-full bg-[#141414] border border-[#2A2A2A] text-[#F8F8F8] text-sm font-semibold hover:border-accent hover:text-accent transition-all"
           >
-            <MessageCircle className="w-4 h-4 text-[#F5C518]" />
+            <MessageCircle className="w-4 h-4 text-accent" />
             <span>Chat on WhatsApp</span>
           </a>
         </div>

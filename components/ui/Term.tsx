@@ -65,7 +65,7 @@ export function Term({ term, customExplanation, children }: TermProps) {
             "after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-[#141414]"
           )}
         >
-          <span className="block font-semibold text-[#F5C518] mb-1 font-display tracking-tight text-[13px]">
+          <span className="block font-semibold text-accent mb-1 font-display tracking-tight text-[13px]">
             {term}
           </span>
           <span className="block text-[#888888]">{explanation}</span>

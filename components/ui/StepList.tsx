@@ -44,7 +44,7 @@ export function StepList({ steps = defaultSteps }: StepListProps) {
     <div className="relative">
       {/* Top Architectural Progress Rule (Desktop) */}
       <div 
-        className="hidden lg:block absolute top-7 left-12 right-12 h-[1px] bg-gradient-to-r from-transparent via-[#F5C518]/30 to-transparent -z-0" 
+        className="hidden lg:block absolute top-7 left-12 right-12 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent -z-0" 
         aria-hidden="true" 
       />
 
@@ -52,33 +52,33 @@ export function StepList({ steps = defaultSteps }: StepListProps) {
         {steps.map((step, idx) => (
           <div
             key={step.number}
-            className="flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#0E1016] border border-white/[0.08] hover:border-[#F5C518]/50 transition-all duration-300 group"
+            className="flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-surface border border-text-main/[0.08] hover:border-accent/50 transition-all duration-300 group"
           >
             <div>
               {/* Step indicator with glowing ring */}
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#141620] border border-white/10 group-hover:border-[#F5C518] text-[#F5C518] flex items-center justify-center font-mono font-bold text-sm transition-colors shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#141620] border border-text-main/10 group-hover:border-accent text-accent flex items-center justify-center font-mono font-bold text-sm transition-colors shadow-sm">
                   {step.number}
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#5C6274]">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-text-muted">
                   PHASE 0{idx + 1}
                 </span>
               </div>
 
-              <h3 className="font-display text-xl font-bold text-white mb-3 group-hover:text-[#F5C518] transition-colors break-words">
+              <h3 className="font-display text-xl font-bold text-text-main mb-3 group-hover:text-accent transition-colors break-words">
                 {step.title}
               </h3>
 
-              <p className="text-[14px] text-[#8E94A4] leading-relaxed mb-6 break-words">
+              <p className="text-[14px] text-text-muted leading-relaxed mb-6 break-words">
                 {step.description}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-white/[0.06] text-xs space-y-1">
-              <span className="font-mono uppercase tracking-wider text-[#F5C518] block font-semibold">
+            <div className="pt-4 border-t border-text-main/[0.06] text-xs space-y-1">
+              <span className="font-mono uppercase tracking-wider text-accent block font-semibold">
                 Tangible Milestone:
               </span>
-              <p className="text-white/80 leading-relaxed break-words">
+              <p className="text-text-main/80 leading-relaxed break-words">
                 {step.outcome}
               </p>
             </div>

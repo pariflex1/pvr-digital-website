@@ -45,33 +45,33 @@ export function DomainShowcase() {
   const activeImage = domainImages[activeSlug] || "/images/showcase/hero-flagship.jpg";
 
   return (
-    <section className="relative bg-[#070709] py-24 sm:py-36 border-b border-white/[0.08] overflow-hidden">
+    <section className="relative bg-primary py-24 sm:py-36 border-b border-surface overflow-hidden">
       {/* Background glow */}
       <div
-        className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full blur-[150px] opacity-15 bg-[#F5C518] pointer-events-none -z-0"
+        className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full blur-[150px] opacity-15 bg-accent pointer-events-none -z-0"
         aria-hidden="true"
       />
 
       <Container size="wide" className="relative z-10">
         {/* Section Header: Editorial Eyebrow & Title */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-white/[0.08]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-surface">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F5C518] uppercase">
+            <div className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-accent uppercase">
               <Sparkles className="w-3.5 h-3.5" />
               <span>CORE ARCHITECTURAL DISCIPLINES</span>
             </div>
-            <h2 className="h2-editorial text-white tracking-tight uppercase">
+            <h2 className="h2-editorial text-text-main tracking-tight uppercase">
               Four Interconnected Capabilities
             </h2>
           </div>
 
-          <p className="text-[15px] sm:text-[16px] text-[#8E94A4] max-w-md leading-relaxed">
+          <p className="text-[15px] sm:text-[16px] text-text-muted max-w-md leading-relaxed">
             Eliminating the coordination overhead of multiple agencies. We architect the website, database, AI bot, and ad funnel together.
           </p>
         </div>
 
         {/* Domain Navigation Bar (Interactive Editorial Tabs) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 pt-6 pb-12 border-b border-white/[0.06]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 pt-6 pb-12 border-b border-text-main/[0.06]">
           {servicesData.map((service, index) => {
             const isActive = service.slug === activeSlug;
             return (
@@ -81,25 +81,25 @@ export function DomainShowcase() {
                 onClick={() => setActiveSlug(service.slug)}
                 className={`text-left p-4 sm:p-6 rounded-xl transition-all duration-300 relative group cursor-pointer ${
                   isActive
-                    ? "bg-[#12141D] border border-[#F5C518]/40 shadow-[0_0_20px_rgba(245,197,24,0.1)]"
-                    : "bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] hover:border-white/15"
+                    ? "bg-surface border border-accent/40 shadow-[0_0_20px_rgba(245,197,24,0.1)]"
+                    : "bg-text-main/[0.02] border border-text-main/[0.06] hover:bg-text-main/[0.04] hover:border-text-main/15"
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <span
                     className={`font-mono text-xs font-bold tracking-wider ${
-                      isActive ? "text-[#F5C518]" : "text-[#5C6274]"
+                      isActive ? "text-accent" : "text-text-muted"
                     }`}
                   >
                     0{index + 1}
                   </span>
-                  <span className="text-[11px] font-mono text-[#8E94A4]">
+                  <span className="text-[11px] font-mono text-text-muted">
                     {service.items.length} deliverables
                   </span>
                 </div>
                 <h3
                   className={`font-display text-base sm:text-lg font-bold transition-colors ${
-                    isActive ? "text-white" : "text-[#8E94A4] group-hover:text-white"
+                    isActive ? "text-text-main" : "text-text-muted group-hover:text-text-main"
                   }`}
                 >
                   {service.title}
@@ -114,48 +114,48 @@ export function DomainShowcase() {
           {/* Left Column (5 Cols): Editorial Storytelling */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#F5C518]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-text-main/[0.04] border border-text-main/10 text-xs font-mono text-accent">
                 <span>{activeService.number}</span>
-                <span className="text-white/20">&bull;</span>
+                <span className="text-text-main/20">&bull;</span>
                 <span>{activeService.scope}</span>
               </div>
 
-              <h3 className="h3-editorial text-white tracking-tight uppercase">
+              <h3 className="h3-editorial text-text-main tracking-tight uppercase">
                 {activeService.title}
               </h3>
 
-              <p className="text-[16px] sm:text-[18px] text-[#8E94A4] leading-relaxed">
+              <p className="text-[16px] sm:text-[18px] text-text-muted leading-relaxed">
                 {activeService.coreValue}
               </p>
             </div>
 
             {/* Key Metric Highlight Pill */}
-            <div className="p-5 rounded-2xl bg-[#0F1117] border border-white/[0.08] flex items-center justify-between gap-4">
+            <div className="p-5 rounded-2xl bg-[#0F1117] border border-text-main/[0.08] flex items-center justify-between gap-4">
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-[#8E94A4]">
+                <span className="block text-xs font-mono uppercase tracking-wider text-text-muted">
                   {activeMetric.label}
                 </span>
-                <span className="font-display text-3xl font-extrabold text-[#F5C518]">
+                <span className="font-display text-3xl font-extrabold text-accent">
                   {activeMetric.value}
                 </span>
               </div>
-              <p className="text-xs text-[#8E94A4] max-w-[200px] text-right leading-relaxed">
+              <p className="text-xs text-text-muted max-w-[200px] text-right leading-relaxed">
                 {activeMetric.detail}
               </p>
             </div>
 
             {/* Top 3 Deliverables Checklist */}
             <div className="space-y-3 pt-2">
-              <span className="block text-xs font-mono uppercase tracking-widest text-[#5C6274]">
+              <span className="block text-xs font-mono uppercase tracking-widest text-text-muted">
                 Featured Deliverables
               </span>
               <ul className="space-y-2.5">
                 {activeService.items.slice(0, 3).map((item) => (
-                  <li key={item.id} className="flex items-start gap-3 text-sm text-[#F8F9FA]/90">
-                    <CheckCircle2 className="w-4 h-4 text-[#F5C518] shrink-0 mt-0.5" />
+                  <li key={item.id} className="flex items-start gap-3 text-sm text-text-main/90">
+                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white font-medium">{item.title}:</strong>{" "}
-                      <span className="text-[#8E94A4] text-xs">{item.bestFor}</span>
+                      <strong className="text-text-main font-medium">{item.title}:</strong>{" "}
+                      <span className="text-text-muted text-xs">{item.bestFor}</span>
                     </span>
                   </li>
                 ))}
@@ -173,11 +173,11 @@ export function DomainShowcase() {
 
           {/* Right Column (7 Cols): Massive Edge-to-Edge Visual Showcase */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-[#0E1016] shadow-[0_20px_60px_rgba(0,0,0,0.7)] group">
+            <div className="relative rounded-3xl overflow-hidden border border-text-main/10 bg-surface shadow-[0_20px_60px_rgba(0,0,0,0.7)] group">
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <Image
                   src={activeImage}
-                  alt={`${activeService.title} Showcase — PVR Digital`}
+                  alt={`${activeService.title} Showcase — PVR Tech`}
                   fill
                   className="object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
                 />
@@ -185,8 +185,8 @@ export function DomainShowcase() {
               </div>
 
               {/* Minimalist Floating Overlay */}
-              <div className="absolute top-4 right-4 editorial-glass rounded-lg px-3 py-1.5 border border-white/10 text-xs font-mono text-white flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#F5C518]" />
+              <div className="absolute top-4 right-4 editorial-glass rounded-lg px-3 py-1.5 border border-text-main/10 text-xs font-mono text-text-main flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent" />
                 <span>ACTIVE MODULE: {activeService.slug.toUpperCase()}</span>
               </div>
             </div>

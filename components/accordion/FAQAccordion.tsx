@@ -36,7 +36,7 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
               <span
                 className={cn(
                   "font-display text-[17px] md:text-[19px] font-bold transition-colors pr-6 break-words",
-                  isOpen ? "text-[#F5C518]" : "text-white group-hover:text-[#F5C518]"
+                  isOpen ? "text-accent" : "text-text-main group-hover:text-accent"
                 )}
               >
                 {faq.question}
@@ -47,8 +47,8 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
                 className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-3 transition-all duration-300 relative border",
                   isOpen
-                    ? "bg-[#F5C518] text-[#070709] border-[#F5C518] shadow-[0_0_12px_rgba(245,197,24,0.3)]"
-                    : "bg-white/[0.04] text-[#8E94A4] border-white/10 group-hover:border-white/30 group-hover:text-white"
+                    ? "bg-accent text-[#070709] border-accent shadow-[0_0_12px_rgba(245,197,24,0.3)]"
+                    : "bg-text-main/[0.04] text-text-muted border-text-main/10 group-hover:border-text-main/30 group-hover:text-text-main"
                 )}
                 aria-hidden="true"
               >
@@ -73,7 +73,7 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
               )}
             >
               <div className="overflow-hidden">
-                <p className="pb-6 pt-1 text-[15px] md:text-[16px] leading-relaxed text-[#8E94A4] max-w-[75ch] break-words">
+                <p className="pb-6 pt-1 text-[15px] md:text-[16px] leading-relaxed text-text-muted max-w-[75ch] break-words">
                   {faq.answer}
                 </p>
               </div>

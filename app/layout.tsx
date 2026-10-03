@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     default: `${BRAND} | Websites, Software & AI Automation — Jhansi, India`
   },
   description:
-    "PVR Digital builds high-speed websites, custom business software, 24/7 WhatsApp AI chatbots, and targeted Meta ad campaigns for Indian businesses. Based in Jhansi, serving all of India.",
+    "PVR Tech builds high-speed websites, custom business software, 24/7 WhatsApp AI chatbots, and targeted Meta ad campaigns for Indian businesses. Based in Jhansi, serving all of India.",
   keywords: [
     "website development Jhansi",
     "web design Jhansi",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "Meta ads agency Jhansi",
     "custom web application India",
     "SEO website Jhansi",
-    "PVR Digital"
+    "PVR Tech"
   ],
   authors: [{ name: BRAND, url: BASE }],
   creator: BRAND,
@@ -91,11 +91,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#070709] text-[#F8F9FA] antialiased selection:bg-[#F5C518] selection:text-[#070709]">
+      <body className="min-h-full flex flex-col bg-primary text-text-main antialiased selection:bg-accent selection:text-[#070709]">
         {/* Skip to main content for accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#F5C518] focus:text-[#0A0A0A] focus:rounded-full focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-[#0A0A0A] focus:rounded-full focus:font-semibold"
         >
           Skip to main content
         </a>

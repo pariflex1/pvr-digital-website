@@ -59,7 +59,7 @@ export default async function Image() {
               }}
             />
             <div style={{ color: "#F5C518", fontSize: "18px", fontWeight: 700 }}>
-              PVR Digital
+              PVR Tech
             </div>
           </div>
 

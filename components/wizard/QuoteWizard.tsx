@@ -184,27 +184,27 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
     }
   };
 
-  const whatsappSummaryMessage = `Hi PVR Digital, I submitted a project quote request on your website:\n- Services: ${(formData.services || []).join(", ")}\n- Business: ${formData.business_type}\n- Budget: ${formData.budget_band}\n- Timeline: ${formData.timeline}\n- Name: ${formData.name}\n- Phone: ${formData.phone}`;
+  const whatsappSummaryMessage = `Hi PVR Tech, I submitted a project quote request on your website:\n- Services: ${(formData.services || []).join(", ")}\n- Business: ${formData.business_type}\n- Budget: ${formData.budget_band}\n- Timeline: ${formData.timeline}\n- Name: ${formData.name}\n- Phone: ${formData.phone}`;
 
   const whatsappHref = getWhatsAppUrl({ customMessage: whatsappSummaryMessage });
 
   if (isSuccess) {
     return (
-      <div className="p-8 sm:p-12 rounded-3xl bg-[#0E1016] border border-white/10 shadow-2xl text-center max-w-xl mx-auto space-y-6 animate-in fade-in duration-300">
+      <div className="p-8 sm:p-12 rounded-3xl bg-surface border border-text-main/10 shadow-2xl text-center max-w-xl mx-auto space-y-6 animate-in fade-in duration-300">
         <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(16,185,129,0.2)]">
           <CheckCircle2 className="w-8 h-8" />
         </div>
 
         <div className="space-y-2">
-          <span className="font-mono text-xs tracking-widest text-[#F5C518] uppercase">
+          <span className="font-mono text-xs tracking-widest text-accent uppercase">
             SPECIFICATION RECEIVED
           </span>
-          <h3 className="font-display text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight">
+          <h3 className="font-display text-2xl sm:text-3xl font-bold text-text-main uppercase tracking-tight">
             Thank You, {formData.name}
           </h3>
         </div>
 
-        <p className="text-[15px] text-[#8E94A4] leading-relaxed">
+        <p className="text-[15px] text-text-muted leading-relaxed">
           We have received your project details. For the fastest response, you can immediately connect with our engineering team on WhatsApp with your answers pre-filled.
         </p>
 
@@ -214,7 +214,7 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("whatsapp_click", { placement: "wizard_success" })}
-            className="w-full inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-[#25D366] text-white font-bold hover:bg-[#20bd5a] transition-all shadow-[0_0_20px_rgba(37,211,102,0.3)]"
+            className="w-full inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-[#25D366] text-text-main font-bold hover:bg-[#20bd5a] transition-all shadow-[0_0_20px_rgba(37,211,102,0.3)]"
           >
             <MessageCircle className="w-5 h-5 fill-white/20" />
             <span>Continue on WhatsApp</span>
@@ -222,7 +222,7 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
 
           <Link
             href="/"
-            className="w-full inline-flex items-center justify-center min-h-[46px] text-xs font-mono uppercase tracking-wider text-[#8E94A4] hover:text-white transition-colors"
+            className="w-full inline-flex items-center justify-center min-h-[46px] text-xs font-mono uppercase tracking-wider text-text-muted hover:text-text-main transition-colors"
           >
             Done & Return to Home
           </Link>
@@ -232,12 +232,12 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
   }
 
   return (
-    <div className="p-6 sm:p-10 rounded-3xl bg-[#0E1016] border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.6)] max-w-3xl">
+    <div className="p-6 sm:p-10 rounded-3xl bg-surface border border-text-main/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.6)] max-w-3xl">
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between text-xs font-mono mb-3">
-          <span className="text-[#8E94A4] uppercase tracking-wider">PHASE 0{currentStep} / 05</span>
-          <span className="text-[#F5C518] font-bold uppercase tracking-widest">
+          <span className="text-text-muted uppercase tracking-wider">PHASE 0{currentStep} / 05</span>
+          <span className="text-accent font-bold uppercase tracking-widest">
             {currentStep === 1 && "CORE DISCIPLINES"}
             {currentStep === 2 && "SECTOR TYPE"}
             {currentStep === 3 && "BUDGET ALLOCATION"}
@@ -245,9 +245,9 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
             {currentStep === 5 && "DIRECT HANDOFF"}
           </span>
         </div>
-        <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-text-main/[0.06] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#F5C518] to-[#FFDE59] transition-all duration-300 rounded-full shadow-[0_0_10px_#F5C518]"
+            className="h-full bg-gradient-to-r from-accent to-[#FFDE59] transition-all duration-300 rounded-full shadow-[0_0_10px_#F5C518]"
             style={{ width: `${(currentStep / 5) * 100}%` }}
           />
         </div>
@@ -268,10 +268,10 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
         {/* Step 1: Select Services */}
         {currentStep === 1 && (
           <div className="space-y-4 animate-in fade-in">
-            <h3 className="font-display text-2xl font-bold text-white uppercase tracking-tight">
+            <h3 className="font-display text-2xl font-bold text-text-main uppercase tracking-tight">
               Which capabilities do you require?
             </h3>
-            <p className="text-sm text-[#8E94A4]">
+            <p className="text-sm text-text-muted">
               Select one or more domains. You can refine this during our technical discovery.
             </p>
 
@@ -285,17 +285,17 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                     onClick={() => handleToggleService(service.slug)}
                     className={`p-5 rounded-2xl border text-left transition-all flex flex-col justify-between cursor-pointer ${
                       isSelected
-                        ? "border-[#F5C518] bg-[#F5C518]/10 shadow-[0_0_20px_rgba(245,197,24,0.15)] ring-1 ring-[#F5C518]"
-                        : "border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20"
+                        ? "border-accent bg-accent/10 shadow-[0_0_20px_rgba(245,197,24,0.15)] ring-1 ring-[#F5C518]"
+                        : "border-text-main/[0.08] bg-text-main/[0.02] hover:bg-text-main/[0.04] hover:border-text-main/20"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-display font-bold text-[16px] text-white">
+                      <span className="font-display font-bold text-[16px] text-text-main">
                         {service.title}
                       </span>
-                      {isSelected && <CheckCircle2 className="w-4 h-4 text-[#F5C518]" />}
+                      {isSelected && <CheckCircle2 className="w-4 h-4 text-accent" />}
                     </div>
-                    <span className="font-mono text-[11px] text-[#8E94A4] uppercase tracking-wider">
+                    <span className="font-mono text-[11px] text-text-muted uppercase tracking-wider">
                       {service.scope}
                     </span>
                   </button>
@@ -315,10 +315,10 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
         {/* Step 2: Business Type */}
         {currentStep === 2 && (
           <div className="space-y-4 animate-in fade-in">
-            <h3 className="font-display text-2xl font-bold text-white uppercase tracking-tight">
+            <h3 className="font-display text-2xl font-bold text-text-main uppercase tracking-tight">
               What type of business do you operate?
             </h3>
-            <p className="text-sm text-[#8E94A4]">
+            <p className="text-sm text-text-muted">
               Helps us tailor relevant benchmarks and case examples.
             </p>
 
@@ -335,8 +335,8 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                     }}
                     className={`p-4 rounded-xl border text-center transition-all cursor-pointer font-medium text-sm ${
                       isSelected
-                        ? "border-[#F5C518] bg-[#F5C518]/10 text-white font-bold ring-1 ring-[#F5C518]"
-                        : "border-white/[0.08] bg-white/[0.02] text-[#8E94A4] hover:text-white hover:border-white/20"
+                        ? "border-accent bg-accent/10 text-text-main font-bold ring-1 ring-[#F5C518]"
+                        : "border-text-main/[0.08] bg-text-main/[0.02] text-text-muted hover:text-text-main hover:border-text-main/20"
                     }`}
                   >
                     {bt}
@@ -357,10 +357,10 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
         {/* Step 3: Budget Range */}
         {currentStep === 3 && (
           <div className="space-y-4 animate-in fade-in">
-            <h3 className="font-display text-2xl font-bold text-white uppercase tracking-tight">
+            <h3 className="font-display text-2xl font-bold text-text-main uppercase tracking-tight">
               Estimated project budget range
             </h3>
-            <p className="text-sm text-[#8E94A4]">
+            <p className="text-sm text-text-muted">
               Helps us architect the most cost-effective scope and technical stack.
             </p>
 
@@ -377,8 +377,8 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                     }}
                     className={`p-4 rounded-xl border text-left transition-all cursor-pointer font-semibold text-sm ${
                       isSelected
-                        ? "border-[#F5C518] bg-[#F5C518]/10 text-white ring-1 ring-[#F5C518]"
-                        : "border-white/[0.08] bg-white/[0.02] text-[#8E94A4] hover:text-white hover:border-white/20"
+                        ? "border-accent bg-accent/10 text-text-main ring-1 ring-[#F5C518]"
+                        : "border-text-main/[0.08] bg-text-main/[0.02] text-text-muted hover:text-text-main hover:border-text-main/20"
                     }`}
                   >
                     {band}
@@ -399,10 +399,10 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
         {/* Step 4: Timeline */}
         {currentStep === 4 && (
           <div className="space-y-4 animate-in fade-in">
-            <h3 className="font-display text-2xl font-bold text-white uppercase tracking-tight">
+            <h3 className="font-display text-2xl font-bold text-text-main uppercase tracking-tight">
               Target completion date
             </h3>
-            <p className="text-sm text-[#8E94A4]">
+            <p className="text-sm text-text-muted">
               We assign senior engineering capacity based on your timeline requirements.
             </p>
 
@@ -419,8 +419,8 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                     }}
                     className={`p-4 rounded-xl border text-left transition-all cursor-pointer font-semibold text-sm ${
                       isSelected
-                        ? "border-[#F5C518] bg-[#F5C518]/10 text-white ring-1 ring-[#F5C518]"
-                        : "border-white/[0.08] bg-white/[0.02] text-[#8E94A4] hover:text-white hover:border-white/20"
+                        ? "border-accent bg-accent/10 text-text-main ring-1 ring-[#F5C518]"
+                        : "border-text-main/[0.08] bg-text-main/[0.02] text-text-muted hover:text-text-main hover:border-text-main/20"
                     }`}
                   >
                     {tl}
@@ -441,16 +441,16 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
         {/* Step 5: Contact Details */}
         {currentStep === 5 && (
           <div className="space-y-4 animate-in fade-in">
-            <h3 className="font-display text-2xl font-bold text-white uppercase tracking-tight">
+            <h3 className="font-display text-2xl font-bold text-text-main uppercase tracking-tight">
               Where should we deliver your quote?
             </h3>
-            <p className="text-sm text-[#8E94A4]">
+            <p className="text-sm text-text-muted">
               No spam. We will review your requirements and reach out via WhatsApp or call.
             </p>
 
             <div className="space-y-4 pt-2">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#8E94A4] mb-1.5">
+                <label className="block text-xs font-mono uppercase tracking-wider text-text-muted mb-1.5">
                   Your Full Name *
                 </label>
                 <input
@@ -462,7 +462,7 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                     setFormData({ ...formData, name: e.target.value });
                     if (validationErrors.name) setValidationErrors((p) => ({ ...p, name: "" }));
                   }}
-                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/[0.03] text-white text-sm focus:outline-none focus:border-[#F5C518]"
+                  className="w-full h-12 px-4 rounded-xl border border-text-main/10 bg-text-main/[0.03] text-text-main text-sm focus:outline-none focus:border-accent"
                 />
                 {validationErrors.name && (
                   <p className="text-xs text-red-400 mt-1 font-mono">{validationErrors.name}</p>
@@ -470,7 +470,7 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#8E94A4] mb-1.5">
+                <label className="block text-xs font-mono uppercase tracking-wider text-text-muted mb-1.5">
                   Mobile Number (WhatsApp Preferred) *
                 </label>
                 <input
@@ -483,7 +483,7 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                     setFormData({ ...formData, phone: e.target.value });
                     if (validationErrors.phone) setValidationErrors((p) => ({ ...p, phone: "" }));
                   }}
-                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/[0.03] text-white text-sm focus:outline-none focus:border-[#F5C518]"
+                  className="w-full h-12 px-4 rounded-xl border border-text-main/10 bg-text-main/[0.03] text-text-main text-sm focus:outline-none focus:border-accent"
                 />
                 {validationErrors.phone && (
                   <p className="text-xs text-red-400 mt-1 font-mono">{validationErrors.phone}</p>
@@ -491,7 +491,7 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#8E94A4] mb-1.5">
+                <label className="block text-xs font-mono uppercase tracking-wider text-text-muted mb-1.5">
                   Work Email (Optional)
                 </label>
                 <input
@@ -499,12 +499,12 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                   placeholder="ramesh@company.com"
                   value={formData.email || ""}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/[0.03] text-white text-sm focus:outline-none focus:border-[#F5C518]"
+                  className="w-full h-12 px-4 rounded-xl border border-text-main/10 bg-text-main/[0.03] text-text-main text-sm focus:outline-none focus:border-accent"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#8E94A4] mb-1.5">
+                <label className="block text-xs font-mono uppercase tracking-wider text-text-muted mb-1.5">
                   Project Notes or Reference URLs (Optional)
                 </label>
                 <textarea
@@ -512,22 +512,22 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
                   placeholder="Current website URL, reference designs, or specific feature requirements..."
                   value={formData.message || ""}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full p-4 rounded-xl border border-white/10 bg-white/[0.03] text-white text-sm focus:outline-none focus:border-[#F5C518]"
+                  className="w-full p-4 rounded-xl border border-text-main/10 bg-text-main/[0.03] text-text-main text-sm focus:outline-none focus:border-accent"
                 />
               </div>
 
               {/* Consent Checkbox */}
               <div className="pt-2">
-                <label className="flex items-start gap-3 cursor-pointer text-xs text-[#8E94A4]">
+                <label className="flex items-start gap-3 cursor-pointer text-xs text-text-muted">
                   <input
                     type="checkbox"
                     checked={formData.consent || false}
                     onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                    className="mt-0.5 rounded text-[#F5C518] focus:ring-[#F5C518]"
+                    className="mt-0.5 rounded text-accent focus:ring-[#F5C518]"
                   />
                   <span>
                     I agree to the{" "}
-                    <Link href="/privacy" className="text-[#F5C518] underline">
+                    <Link href="/privacy" className="text-accent underline">
                       Privacy Policy
                     </Link>{" "}
                     and consent to receiving project communication via WhatsApp, call, or email.
@@ -542,12 +542,12 @@ export function QuoteWizard({ initialServiceSlug }: QuoteWizardProps) {
         )}
 
         {/* Step Navigation Controls */}
-        <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-white/[0.08]">
+        <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-text-main/[0.08]">
           {currentStep > 1 ? (
             <button
               type="button"
               onClick={handlePrevStep}
-              className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#8E94A4] hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-text-muted hover:text-text-main transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
               <span>Back</span>

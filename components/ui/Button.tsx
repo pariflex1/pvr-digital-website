@@ -24,13 +24,13 @@ export function Button({
 
   const variantStyles = {
     primary:
-      "bg-[#F5C518] text-[#070709] font-bold hover:bg-[#FFD94D] shadow-[0_2px_20px_rgba(245,197,24,0.22)] hover:shadow-[0_4px_30px_rgba(245,197,24,0.38)] border border-[#F5C518]",
+      "bg-accent text-[#070709] font-bold hover:bg-accent shadow-md hover:shadow-lg border border-accent",
     secondary:
-      "bg-[#12141C]/80 text-[#F8F9FA] border border-white/10 hover:border-white/25 hover:bg-[#1A1D28] shadow-sm backdrop-blur-md",
+      "bg-surface/80 text-text-main border border-text-main/10 hover:border-text-main/25 hover:bg-surface shadow-sm",
     ghost:
-      "bg-transparent text-[#9BA1B2] hover:text-[#FFFFFF] hover:bg-white/[0.04]",
+      "bg-transparent text-text-muted hover:text-[#FFFFFF] hover:bg-text-main/[0.04]",
     "gold-outline":
-      "bg-transparent text-[#F5C518] border border-[#F5C518]/30 hover:border-[#F5C518] hover:bg-[#F5C518]/10 hover:shadow-[0_0_20px_rgba(245,197,24,0.15)]"
+      "bg-transparent text-accent border border-accent/30 hover:border-accent hover:bg-accent/10 hover:shadow-[0_0_20px_rgba(245,197,24,0.15)]"
   };
 
   const sizeStyles = {

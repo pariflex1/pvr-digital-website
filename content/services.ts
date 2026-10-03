@@ -52,7 +52,7 @@ export const servicesData: ServiceLine[] = [
       { step: "04", title: "Launch & Support", description: "Deploy with custom domain, SSL, analytics, and ongoing maintenance." }
     ],
     relatedServices: [
-      { title: "Facebook & Instagram Ads", slug: "meta-ads", pairingReason: "Fuel your new website with targeted, high-intent traffic." },
+      { title: "Meta Ads", slug: "meta-ads", pairingReason: "Fuel your new website with targeted, high-intent traffic." },
       { title: "AI Solutions & Automation", slug: "ai-automation", pairingReason: "Add 24/7 WhatsApp and web chatbots to capture leads automatically." }
     ],
     items: [
@@ -269,7 +269,7 @@ export const servicesData: ServiceLine[] = [
       { step: "04", title: "Testing & Live Monitoring", description: "Conduct real scenario testing, team handoff protocols, and analytics logging." }
     ],
     relatedServices: [
-      { title: "Facebook & Instagram Ads", slug: "meta-ads", pairingReason: "Instantly qualify and nurture ad leads using automated WhatsApp chatbots." },
+      { title: "Meta Ads", slug: "meta-ads", pairingReason: "Instantly qualify and nurture ad leads using automated WhatsApp chatbots." },
       { title: "Web & Application Development", slug: "web-app-development", pairingReason: "Connect automation directly into your internal database and CRM." }
     ],
     items: [
@@ -356,11 +356,11 @@ export const servicesData: ServiceLine[] = [
     id: "meta-ads",
     slug: "meta-ads",
     number: "04",
-    title: "Facebook & Instagram Ads",
+    title: "Meta Ads",
     navTitle: "Meta Ads",
     scope: "10 Meta Marketing Services",
     coreValue: "Targeted campaigns delivering measurable leads, sales, and optimized ad ROI.",
-    intro: "Reach the right people on Facebook and Instagram, generate quality enquiries and track exactly what your ad budget delivers.",
+    intro: "Reach the right people with Meta Ads, generate quality enquiries and track exactly what your ad budget delivers.",
     whoItIsFor: [
       // DRAFT-REVIEW
       "Companies wanting a predictable, consistent stream of buyer enquiries each month.",
@@ -386,9 +386,9 @@ export const servicesData: ServiceLine[] = [
         bestFor: "Brands wanting a clear commercial blueprint before spending ad dollars." // DRAFT-REVIEW
       },
       {
-        id: "facebook-instagram-campaigns",
-        slug: "facebook-instagram-campaigns",
-        title: "Facebook & Instagram Campaigns",
+        id: "meta-ads-campaigns",
+        slug: "meta-ads-campaigns",
+        title: "Meta Ads Campaigns",
         description: "End-to-end management of ad campaigns across Feeds, Stories, and Reels, structured for cost efficiency and reach.",
         bestFor: "Full-funnel brand visibility and ongoing lead generation." // DRAFT-REVIEW
       },
